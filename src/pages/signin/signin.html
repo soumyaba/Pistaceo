@@ -1,0 +1,75 @@
+<!--
+  Generated template for the SigninPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <!-- <ion-navbar> -->
+    <ion-row no-margin>
+        <ion-col col-10 no-padding>
+            <!-- <ion-title text-center text-uppercase>{{'Login' | translate }}</ion-title> -->
+        </ion-col>
+        <ion-col col-2 no-padding text-center>
+            <button ion-button round class="topbtn" (click)="addurl()">
+                    <ion-icon name="more" ></ion-icon>
+            </button>
+        </ion-col>
+    </ion-row>
+    <!-- </ion-navbar> -->
+
+</ion-header>
+
+
+<ion-content padding>
+    <!-- Themes Login + logo 1 -->
+    <ion-grid no-padding>
+        <ion-row padding-horizontal align-self-center>
+            <ion-col calign-self-start col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6 [class]="isAndroid ? 'paddAndroid' : 'paddIos' ">
+                <img src="assets/images/icons/favicon1.png">
+                <!-- <h2 login-subtitle no-margin text-uppercase>Productiviti</h2> -->
+            </ion-col>
+            <ion-col align-self-start col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
+                <!---Input field username-->
+                <ion-item transparent>
+                    <ion-label stacked>
+                        <ion-icon name="contact"></ion-icon> {{'Username' | translate}}</ion-label>
+                    <ion-input required placeholder="{{'Enter username' | translate }}" type="text" [(ngModel)]="username" [dir]="rtlSupport" class="lowercase" autocapitalize="off" (ngModelChange)="(username!=null)?username = username.toLowerCase():''"></ion-input>
+                    {{username}}
+                    <ion-label error-field color="delateButton" no-margin *ngIf="!isUsernameValid">{{'Username name is required' | translate }}</ion-label>
+                </ion-item>
+                <!---Input field password-->
+                <ion-item>
+                    <ion-label stacked>
+                        <ion-icon name="lock"></ion-icon>{{'Password' | translate}}</ion-label>
+                    <ion-input required [type]="passwordType" placeholder="{{'Enter password' | translate }}" [(ngModel)]="password" [dir]="rtlSupport"></ion-input>
+                    <!-- autocapitalize="off" (ngModelChange)="(password!=null)?password = password.toLowerCase():''" class="lowercase" -->
+                    <ion-icon item-end [name]="passwordIcon" class="passwordIcon" (click)="hideShowPassword()" *ngIf="password"></ion-icon>
+                    <ion-label error-field color="delateButton" no-margin *ngIf="!isPasswordValid">{{'Password is required' | translate }}</ion-label>
+                </ion-item>
+            </ion-col>
+            <!---Share Section-->
+            <ion-col align-self-end bottom-form col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
+                <!---Login button-->
+                <button ion-button full text-capitalize default-button (click)="goToHomePage()" type="submit">{{'Login' | translate }}</button>
+
+            </ion-col>
+            <ion-col col-12>
+                <!-- <div description text-center>
+                    <a text-capitalize ion-text class="blueColor" (click)="forgotPassword()">ForgotPassword</a>
+                </div> -->
+                <!-- <div description text-center> -->
+                <!-- <button ion-button button-clear text-capitalize clear float-right (click)="onEvent('onForgot')">forgotPassword</button> -->
+                <!-- <a text-capitalize ion-text class="blueColor" (click)="addurl()">Set URL</a> -->
+                <!-- </div> -->
+            </ion-col>
+
+            <!-- <button ion-button button-clear text-capitalize clear float-left (click)="onEvent('onSkip')">skip</button> -->
+
+
+            <!---End Share Section-->
+        </ion-row>
+    </ion-grid>
+
+</ion-content>

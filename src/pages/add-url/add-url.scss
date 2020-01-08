@@ -1,0 +1,23 @@
+    page-add-url {
+        @include settingAnimationHeader;
+        .fade-in-left-item {
+            -webkit-animation: fadeInLeft 800ms;
+            -moz-animation: fadeInLeft 800ms;
+            -o-animation: fadeInLeft 800ms;
+            animation: fadeInLeft 800ms;
+        }
+        .topbtn {
+            border-radius: 70% !important;
+            padding: 13px !important;
+            box-shadow: 2px 1px 3px 1px #ccc;
+            width: 41px;
+            height: 41px;
+        }
+        .whiteSpace {
+            white-space: initial;
+        }
+        .width {
+            width: 100px;
+            border-radius: 5px;
+        }
+    }

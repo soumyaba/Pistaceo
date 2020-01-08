@@ -1,0 +1,24 @@
+page-archive {
+    @include settingAnimationHeader;
+    .fade-in-left-item {
+        -webkit-animation: fadeInLeft 800ms;
+        -moz-animation: fadeInLeft 800ms;
+        -o-animation: fadeInLeft 800ms;
+        animation: fadeInLeft 800ms;
+    }
+    .subject {
+        font-size: 13px !important;
+        text-overflow: inherit;
+        white-space: normal;
+    }
+    .typeName {
+        text-overflow: inherit;
+        white-space: normal;
+        font-size: 13px !important;
+    }
+    .title {
+        font-size: 13px !important;
+        text-overflow: inherit;
+        white-space: normal;
+    }
+}

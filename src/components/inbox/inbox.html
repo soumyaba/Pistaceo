@@ -1,0 +1,80 @@
+<ion-header>
+
+    <ion-navbar class="background" style="background-color: #246275">
+        <button ion-button menuToggle>
+          <ion-icon class="icon-menu" name="menu"></ion-icon>
+        </button>
+        <div buy>
+            <!-- <ion-title>{{'Inbox' | translate }}</ion-title> -->
+            <ion-row no-margin>
+                <ion-col no-padding col-4>
+                    <h6 class="inboxTitle"> {{'Inbox' | translate }}</h6>
+                </ion-col>
+                <ion-col no-padding col-7 text-right text-wrap>
+                    <p class="userNameStyle">
+                        <ion-icon name="contact"></ion-icon> {{userName}}
+                    </p>
+                </ion-col>
+            </ion-row>
+        </div>
+    </ion-navbar>
+</ion-header>
+<!-- <ion-navbar hideBackButton="true" [ngClass]="{'active':isClassActive()}" transparent>
+        <ion-buttons left>
+            <button ion-button icon-only (click)="goBack()">
+                <ion-icon name="arrow-back"></ion-icon>
+              </button>
+        </ion-buttons>
+        <ion-title>Inbox</ion-title>
+    </ion-navbar> -->
+<!-- </ion-header> -->
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-grid no-padding *ngIf="animateItems !== undefined">
+        <ion-row>
+            <ion-col col-12 no-padding>
+                <ion-list no-margin>
+                    <ion-item-sliding [ngClass]="animateClass" *ngFor="let item of animateItems; let i = index;" #slidingItem no-padding>
+                        <ion-item border [ngClass]="item.status !=='NEW'? 'backread': 'background' ">
+                            <ion-row no-margin>
+                                <ion-col col-1 (click)="itemClick(item)" no-padding>
+                                    <ion-icon icon-small item-left name="contact" class="iconColor">
+                                        <!-- <i class=" fa fa-user-circle iconColor"></i> -->
+                                    </ion-icon>
+                                </ion-col>
+                                <ion-col col-1 no-padding (click)="itemClick(item)">
+                                    <ion-icon icon-small item-left name="flag" *ngIf="item.flag === 1" class="top"></ion-icon>
+                                </ion-col>
+                                <ion-col col-4 (click)="itemClick(item)" no-padding>
+                                    <h6 item-title><span class="subject"><b>{{'Subject' | translate }}: </b>{{item.subject}}</span> </h6>
+
+                                    <h6 item-title class="typeName"><b>{{'Type' | translate}}: </b>{{item.typeName}}</h6>
+                                </ion-col>
+                                <ion-col col-1 (click)="itemClick(item)"></ion-col>
+                                <ion-col col-4 (click)="itemClick(item)" no-padding>
+                                    <h6 item-title class="title">{{item.createdByName}}</h6>
+                                    <h6 item-title class="title">{{item.refNo}}</h6>
+                                    <h6 item-title class="title">{{item.createdOn}}</h6>
+                                </ion-col>
+                                <ion-col col-1 text-left no-padding>
+                                    <ion-icon name="more" class="iconActionsColor" (click)="showActions(item)"></ion-icon>
+                                </ion-col>
+                            </ion-row>
+                        </ion-item>
+                        <!-- <ion-item-options no-lines>
+                            <button ion-button text-capitalize color="delateButton" padding>
+                               <ion-icon name="trash"></ion-icon>
+                              </button>
+                        </ion-item-options> -->
+                    </ion-item-sliding>
+
+                </ion-list>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <!-- </ion-refresher-content>
+    </ion-refresher> -->
+</ion-content>

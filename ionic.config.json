@@ -1,0 +1,7 @@
+{
+    "name": "Productivti",
+    "integrations": {
+        "cordova": {}
+    },
+    "type": "ionic-angular"
+}

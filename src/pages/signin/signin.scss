@@ -1,0 +1,111 @@
+page-signin {
+    ion-grid,
+    ion-row {
+        height: 100%;
+    }
+    ion-grid,
+    ion-row {
+        height: 100%;
+    }
+    // Settings Logo
+    img {
+        max-width: 160px;
+        max-height: 160px;
+        display: block;
+    }
+    ion-item {
+        padding-left: 0 !important;
+        padding-bottom: 15px !important;
+        [error-field] {
+            margin: 0 !important;
+            position: absolute !important;
+            bottom: 0 !important;
+            right: 0 !important;
+            font-size: 12px;
+            // color: #246275 !important;
+        }
+        .item-inner {
+            border-bottom-color: theme-colors('textColors', 'secondary') !important;
+            box-shadow: none !important;
+        }
+        ion-label {
+            margin: 0 !important;
+        }
+    }
+    [stacked] {
+        font-size: 10px !important;
+    }
+    [login-title] {
+        color: color($loginPage, login-title-logo-1);
+    }
+    [login-subtitle] {
+        color: #246275 !important;
+        font-weight: bold !important;
+    }
+    [description] {
+        font-size: $h5-font-size !important;
+        font-weight: 100;
+        letter-spacing: 1px;
+        color: theme-colors('textColors', 'secondary');
+    }
+    // Settings Button
+    [bottom-form] {
+        button:nth-child(1) {
+            margin: 12px 0;
+        }
+        [default-button] {
+            font-weight: 400 !important;
+        }
+    }
+    .errorColor {
+        color: rgb(209, 14, 14) !important;
+    }
+    .toolbar-title {
+        margin-left: 17%;
+        margin-top: 3% !important;
+    }
+    .blueColor {
+        color: #246275;
+    }
+    .alert-md .alert-wrapper {
+        border-radius: 2px;
+        max-width: 500px;
+        background-color: #fff;
+        -webkit-box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
+        width: 97% !important;
+    }
+    .alert-wrapper {
+        min-width: 90% !important;
+    }
+    .alertCustomCss {
+        min-width: 90% !important;
+        max-width: 95% !important;
+    }
+    .topbtn {
+        border-radius: 70% !important;
+        padding: 13px !important;
+        box-shadow: 3px 3px 7px 1px #ccc;
+        width: 30px;
+        height: 30px;
+    }
+    .button-ios {
+        margin-top: 15px !important;
+    }
+    .passwordIcon {
+        font-size: 2rem !important;
+        position: relative !important;
+        top: 15px !important;
+        margin: 0 auto !important;
+        color: #246275;
+    }
+    .lowercase {
+        text-transform: lowercase;
+    }
+    .paddAndroid {
+        margin-left: 25%;
+    }
+    .paddIos {
+        margin-left: 39%;
+    }
+}

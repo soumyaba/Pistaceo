@@ -1,0 +1,104 @@
+            page-folder-permissions {
+                @include settingAnimationHeader;
+                .fade-in-left-item {
+                    -webkit-animation: fadeInZoom 800ms;
+                    -moz-animation: fadeInZoom 800ms;
+                    -o-animation: fadeInZoom 800ms;
+                    animation: fadeInZoom 800ms;
+                }
+                .textalign {
+                    text-align: center;
+                }
+                .topbtn {
+                    border-radius: 70% !important;
+                    padding: 13px !important;
+                    box-shadow: 3px 3px 7px 1px #ccc;
+                    width: 41px;
+                    height: 41px;
+                }
+                .toolbar .toolbar-title {
+                    text-align: center !important;
+                    margin-top: 10px !important;
+                }
+                .alignit {
+                    white-space: initial;
+                }
+                .textRight {
+                    text-align: right;
+                }
+                .addPermissions {
+                    border-radius: 50%;
+                    width: 41px;
+                    height: 41px;
+                    box-shadow: 3px 3px 7px 1px #ccc;
+                }
+                .overflowList {
+                    max-height: 250px;
+                    overflow-y: scroll;
+                    overflow-x: hidden;
+                }
+                table {
+                    border-collapse: unset;
+                    border-spacing: 5px !important;
+                    width: 100%;
+                }
+                .greenIcon {
+                    color: #246275;
+                }
+                .redIcon {
+                    color: rgba(214, 52, 52, 0.897);
+                }
+                .top {
+                    margin-top: 10px;
+                }
+                .roleName {
+                    font-size: 16px;
+                    color: #8e8e93;
+                    margin-left: 15px;
+                }
+                .whitespa {
+                    white-space: unset;
+                }
+                .searchbar-md .searchbar-input {
+                    background-color: #fff !important;
+                }
+                .toolbar-title-md {
+                    margin-top: 15px !important;
+                    margin-bottom: 10px !important;
+                    text-align: center;
+                }
+                .addWidth {
+                    width: 109px;
+                }
+                .btnRadius {
+                    border-radius: 5px;
+                }
+                // ion-input {
+                //     input {
+                //         text-align: right;
+                //         margin-right: -30px;
+                //          ::-webkit-input-placeholder {
+                //             text-align: right;
+                //         }
+                //     }
+                // }
+                .borderBtm {
+                    border-bottom: 1px solid #ccc;
+                }
+                .searchbar-md {
+                    background: inherit;
+                    padding: 0 !important;
+                }
+                ion-icon {
+                    font-size: 1.5em;
+                }
+                .textLeft {
+                    text-align: left;
+                }
+                .textRight {
+                    text-align: right;
+                }
+                ion-searchbar {
+                    text-align: right !important;
+                }
+            }

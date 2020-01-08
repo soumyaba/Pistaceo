@@ -1,0 +1,54 @@
+<!--
+  Generated template for the SearchWordViewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-row no-margin>
+            <ion-col col-8 no-padding>
+                <ion-title>{{'Search Document' | translate }}</ion-title>
+            </ion-col>
+            <ion-col col-2 no-padding text-right>
+                <button ion-button round class="topbtn" type="button" *ngIf="firstPage" (click)="previousPageClicked()"><ion-icon name="skip-backward"></ion-icon></button>
+            </ion-col>
+            <ion-col col-2 no-padding text-right>
+                <button ion-button round class="topbtn" type="button" *ngIf="lastPage" (click)="nextPageClicked()"><ion-icon name="skip-forward"></ion-icon></button>
+            </ion-col>
+        </ion-row>
+
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-slides #Slides zoom="true" *ngIf="imageToShow !== ''">
+        <ion-slide class="swiper-zoom-container">
+            <img [src]="imageToShow">
+        </ion-slide>
+    </ion-slides>
+    <ion-row no-margin *ngIf=" totalPages > 1">
+        <ion-col col-3></ion-col>
+        <ion-col col-1 no-padding>
+            <button class="padding0 styleicons" (click)="firstPageShow(1)" [disabled]="curPage === 1"><ion-icon name="rewind" class="pageNumber color" ></ion-icon></button>
+        </ion-col>
+        <ion-col col-1 no-padding>
+            <button class="padding0 styleicons" (click)="previousPage(curPage-1)" [disabled]="curPage === 1"><ion-icon name="skip-backward" class="pageNumber color"></ion-icon></button>
+        </ion-col>
+        <ion-col col-2 no-padding class="pageNumber" text-center>
+            {{curPage}}/{{totalPages}}
+        </ion-col>
+        <ion-col col-1 no-padding>
+            <button class="padding0 styleicons" (click)="nextPage(curPage+1)" [disabled]="curPage === totalPages"><ion-icon name="skip-forward" class="pageNumber color"></ion-icon></button>
+        </ion-col>
+        <ion-col col-1 no-padding>
+            <button class="padding0 styleicons" (click)="lastPageShow(totalPages)" [disabled]="curPage === totalPages"><ion-icon name="fastforward" class="pageNumber color"></ion-icon></button>
+        </ion-col>
+        <ion-col col-3></ion-col>
+    </ion-row>
+    <br>
+
+</ion-content>

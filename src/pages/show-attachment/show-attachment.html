@@ -1,0 +1,68 @@
+<!--
+  Generated template for the ShowAttachmentPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-row no-margin>
+            <ion-col col-10>
+                <ion-title>Attachments</ion-title>
+            </ion-col>
+            <ion-col col-2 no-padding text-right>
+                <button ion-button (click)="close()" round class="topbtn">
+              <ion-icon name="close" ></ion-icon>
+            </button>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <div *ngIf="attachmentres.length > 0" class="whiteSpace">
+        <ion-item no-padding>
+            <ion-row no-margin class="whiteSpace" text-left>
+                <ion-col col-1 no-padding>
+                </ion-col>
+                <ion-col col-6 no-padding>
+                    <b>Document Title</b>
+                </ion-col>
+                <ion-col col-5 no-padding>
+                    <b> DocType Name</b>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-grid no-padding class="whiteSpace" id="overflow">
+            <ion-list no-margin>
+                <ion-item-sliding [ngClass]="animateClass" *ngFor="let value of attachmentres; let i = index;" #slidingItem no-padding>
+                    <ion-item border no-lines no-padding>
+                        <ion-row no-margin class="whiteSpace" text-left>
+                            <ion-col col-1 no-padding>
+                                <span class="pointer" *ngIf="value.format === 'application/pdf'"><img src='assets/images/pdf-icon.png' alt="folder" style="width:20px; height: 20px; margin-top: 7px;">
+                                    </span>
+                                <span class="pointer" *ngIf="value.format === 'image/png'"><img src='assets/images/png-icon.png' alt="folder" style="width:20px; height:20px;margin-top: 7px;">
+                                     </span>
+                                <span class="pointer" *ngIf="value.format !== 'application/pdf' && value.format !== 'image/png'"><img src='assets/images/Docs-icon.png' alt="folder" style="width:20px; height: 20px; margin-top: 7px;">
+                             </span>
+                            </ion-col>
+                            <ion-col col-6 no-padding text-left>
+                                {{value.docTitle}}
+                            </ion-col>
+                            <ion-col col-5 no-padding>
+                                {{value.docType.name}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-item>
+                    <ion-item-options dir="ltr" side="right">
+                        <button ion-button><ion-icon name="download" (click)="download(value)"></ion-icon></button>
+                    </ion-item-options>
+                </ion-item-sliding>
+            </ion-list>
+        </ion-grid>
+    </div>
+
+</ion-content>

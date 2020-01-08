@@ -1,0 +1,147 @@
+                                                /*  #Style First Screen (Home)
+================================================*/
+
+                                                page-home {
+                                                    @include settingAnimationHeader;
+                                                    .fade-in-left-item {
+                                                        -webkit-animation: fadeInLeft 800ms;
+                                                        -moz-animation: fadeInLeft 800ms;
+                                                        -o-animation: fadeInLeft 800ms;
+                                                        animation: fadeInLeft 800ms;
+                                                    }
+                                                    [default-background] {
+                                                        height: 100%;
+                                                        width: 100%;
+                                                        display: table;
+                                                        @include darkening-blend-mode;
+                                                        .ionic-description {
+                                                            display: table-cell;
+                                                            vertical-align: middle;
+                                                            z-index: 999;
+                                                            position: relative;
+                                                            h2[item-title] {
+                                                                margin: 0;
+                                                                color: theme-colors('textColors', 'secondaryBase') !important;
+                                                                font-weight: bold !important;
+                                                            }
+                                                            p[item-subtitle] {
+                                                                color: theme-colors('textColors', 'secondaryBase') !important;
+                                                                z-index: 999;
+                                                                position: relative;
+                                                            }
+                                                        }
+                                                        a {
+                                                            color: theme-colors('textColors', 'accent') !important;
+                                                            text-decoration: underline;
+                                                            visibility: visible !important;
+                                                            position: absolute;
+                                                            bottom: 25px;
+                                                            left: 25px;
+                                                            right: 25px;
+                                                            z-index: 999;
+                                                        }
+                                                    }
+                                                    ion-navbar {
+                                                        [buy] {
+                                                            .title-ios {
+                                                                width: 90%;
+                                                            }
+                                                            .button-ios {
+                                                                height: 3rem !important;
+                                                                position: absolute;
+                                                                right: 5px;
+                                                                top: 20px !important;
+                                                            }
+                                                            ion-title {
+                                                                width: 70%;
+                                                            }
+                                                            [defoult-button] {
+                                                                background: #246275;
+                                                                color: #fff;
+                                                                position: absolute;
+                                                                right: 5px;
+                                                                top: 5px;
+                                                            }
+                                                            .headerType {
+                                                                height: 35px;
+                                                                background: #246275;
+                                                                color: #fff;
+                                                                margin: 3px;
+                                                                padding: 7px;
+                                                            }
+                                                            .selectdrop {
+                                                                width: 100%;
+                                                                color: #fff;
+                                                                background: #246275;
+                                                                border: none
+                                                            }
+                                                            h6 {
+                                                                font-size: 17px !important;
+                                                                color: #246275 !important;
+                                                            }
+                                                            .userNameStyle {
+                                                                color: #246275;
+                                                                font-size: 15px;
+                                                            }
+                                                        }
+                                                    }
+                                                    ion-slide.swiper-slide {
+                                                        align-items: flex-start;
+                                                    }
+                                                    .searchbar-md .searchbar-input {
+                                                        background-color: #fff !important;
+                                                    }
+                                                    ion-title {
+                                                        margin-top: 10px;
+                                                    }
+                                                    .active {
+                                                        font-size: 31px;
+                                                        color: #7cb342;
+                                                        -webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.2);
+                                                        box-shadow: 0 0px 0px rgba(0, 0, 0, 0.2);
+                                                    }
+                                                    .inactive {
+                                                        font-size: 31px;
+                                                        opacity: 0.7;
+                                                        color: #cccccc;
+                                                    }
+                                                    .item-md {
+                                                        padding-left: 0 !important;
+                                                    }
+                                                    .subject {
+                                                        font-size: 13px !important;
+                                                    }
+                                                    .whiteSpace {
+                                                        white-space: initial;
+                                                    }
+                                                    .item-md.item-block .item-inner {
+                                                        padding-right: 0 !important;
+                                                    }
+                                                    .searchbar-md {
+                                                        background: #fff;
+                                                        padding: 0 !important;
+                                                    }
+                                                    // .toolbar-title-md {
+                                                    //     padding: 0 12px;
+                                                    //     font-size: 17px !important;
+                                                    //     font-weight: 500;
+                                                    //     color: #fff;
+                                                    //     margin-top: -10px;
+                                                    // }
+                                                    // .searchbar-md .searchbar-input {
+                                                    //     background-color: #246275 !important;
+                                                    // }
+                                                    .brdrbtm {
+                                                        border-top: 1px solid #ccc;
+                                                        padding: 10px;
+                                                        color: #246275;
+                                                    }
+                                                    .title {
+                                                        font-size: 13px !important;
+                                                        text-overflow: inherit;
+                                                        white-space: normal;
+                                                    }
+                                                    .label-md {
+                                                        margin: 0 !important;
+                                                    }
+                                                }

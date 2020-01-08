@@ -1,0 +1,108 @@
+dynamic-form {
+    .item-md {
+        padding-left: 0px !important;
+    }
+    .headingCss {
+        background: #246275;
+        color: #fff;
+        height: 35px;
+        border-radius: 4px;
+    }
+    .padding0 {
+        padding: 0 !important;
+    }
+    .list .item[no-lines],
+    .list .item[no-lines] .item-inner {
+        border-width: 0;
+        padding: 0 !important;
+    }
+    .sectionHeadingCss {
+        margin-top: 9px;
+    }
+    // .label {
+    //      margin: 7px;
+    // }
+    .rowPad {
+        margin-left: 4px;
+    }
+    .select-ios {
+        padding-left: 0px !important;
+    }
+    .datetime-ios {
+        padding: 0px !important;
+    }
+    .datetime-md {
+        padding: 9px !important;
+    }
+    .text-center {
+        text-align: center;
+    }
+    #fileInput {
+        position: absolute;
+        opacity: 0;
+        display: none !important;
+    }
+    .attachFiles {
+        border-radius: 50% !important;
+        width: 30px;
+        height: 30px;
+    }
+    .themeText {
+        color: #246275;
+    }
+    [icon-only] ion-icon {
+        font-size: 1.5em !important;
+    }
+    .row-box {
+        border: 1px solid #ccc !important;
+        padding: 5px;
+    }
+    .saveText {
+        width: 85px;
+        border-radius: 4px;
+    }
+    .removeIcons {
+        color: #246275;
+        text-align: center;
+        font-size: 25px;
+        margin-top: 7px;
+    }
+    .border-radius {
+        border-radius: 4px;
+    }
+    .select-md {
+        padding-left: 10px !important;
+    }
+    table tbody tr {
+        border-top: 0px solid #dbdbdb !important;
+    }
+    .forecast_container {
+        overflow-x: scroll!important;
+        overflow-y: hidden;
+        word-wrap: break-word;
+        padding: 0 !important;
+    }
+    .forecast_div {
+        border-bottom: 1px solid #dbdbdb;
+    }
+    .noPadding {
+        padding: 0 !important;
+    }
+    .select-md {
+        padding-left: 5px !important;
+    }
+    .rowHeight {
+        height: 46px !important;
+    }
+    .topbtn {
+        border-radius: 70% !important;
+        padding: 13px !important;
+        box-shadow: 3px 3px 7px 1px #ccc;
+        width: 33px;
+        height: 33px;
+    }
+    .topBorder {
+        border-top: 1px solid #dbdbdb;
+        margin-top: -1px;
+    }
+}

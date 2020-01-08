@@ -1,0 +1,166 @@
+<!--
+  Generated template for the FolderPermissionsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+        <ion-row no-margin>
+            <ion-col col-8 no-padding>
+                <ion-title>{{'Folder Permission' | translate }}</ion-title>
+            </ion-col>
+            <ion-col col-2 no-padding class="textalign">
+                <button ion-button icon-only (click)="addFolderPermission()" class="addPermissions"><ion-icon name="person-add"></ion-icon></button>
+            </ion-col>
+            <ion-col col-2 no-padding class="textalign">
+                <button ion-button (click)="close()" round class="topbtn">
+                  <ion-icon name="close" ></ion-icon>
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-item item-content>
+        <ion-row no-margin>
+            <ion-col col-4 no-padding class="alignit">
+                <b>{{'Grantee Name' | translate }}</b>
+            </ion-col>
+            <ion-col col-4 no-padding class="alignit">
+                <b>
+                   {{'Access Level' | translate }}
+                </b>
+            </ion-col>
+            <ion-col col-4 no-padding class="alignit">
+                <b>
+                    {{'Permission Source' | translate }}
+                </b>
+            </ion-col>
+        </ion-row>
+    </ion-item>
+    <ion-list no-margin *ngIf="folderPermission" no-lines class="overflowList">
+        <ion-item-sliding [ngClass]="animateClass" *ngFor="let permission of folderPermission; let i = index;" #slidingItem no-lines>
+            <ion-item border no-lines no-padding>
+                <ion-grid item-content>
+                    <ion-row no-margin>
+                        <ion-col col-4 no-padding class="alignit">
+                            {{permission.granteeName}}
+                        </ion-col>
+                        <ion-col col-4 no-padding class="alignit">
+                            {{permission.accessLevel}}
+                        </ion-col>
+                        <ion-col col-4 no-padding class="alignit">
+                            {{permission.permissionSource}}
+                        </ion-col>
+                        <!-- <ion-col col-1 no-padding>
+                            <ion-icon name="create"></ion-icon>
+                        </ion-col>
+                        <ion-col col-1 no-padding>
+                            <ion-icon name="trash"></ion-icon>
+                        </ion-col> -->
+                    </ion-row>
+                </ion-grid>
+            </ion-item>
+            <ion-item-options side="right" dir="ltr">
+                <button ion-button>
+                  <ion-icon name="create"  (click)="editFolderPermissions(permission)" *ngIf=" permission.permissionSource !== 'Class' && permission.permissionSource !== 'Folder'">
+                </ion-icon>
+              </button>
+                <button ion-button><ion-icon name="trash"  *ngIf=" permission.permissionSource === 'Direct' " (click)="folderDeletePermissions(permission)">
+                </ion-icon ></button>
+            </ion-item-options>
+        </ion-item-sliding>
+
+    </ion-list>
+    <!-- <table>
+        <thead>
+            <tr>
+
+                <th class="alignit">
+                    Grantee Name
+                </th>
+                <th class="alignit">
+                    Access Level
+                </th>
+                <th class="alignit">
+                    Permission Source
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="pointer" *ngFor="let permission of folderPermission">
+                <td class="alignit textalign">
+                    {{permission.granteeName}}
+                </td>
+                <td class="alignit textalign">
+                    {{permission.accessLevel}}
+                </td>
+                <td class="alignit textalign">
+                    {{permission.permissionSource}}
+                </td>
+                <td>
+                    <ion-row no-margin>
+                        <ion-col col-6 no-padding>
+                            <ion-icon name="create" class="greenIcon" (click)="editFolderPermissions(permission)" *ngIf=" permission.permissionSource !== 'Class' && permission.permissionSource !== 'Folder'">
+                            </ion-icon>
+                        </ion-col>
+                        <ion-col col-6 no-padding>
+                            <ion-icon name="trash" class="redIcon" *ngIf=" permission.permissionSource === 'Direct' " (click)="folderDeletePermissions(permission)"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </td>
+            </tr>
+        </tbody>
+    </table> -->
+
+    <ion-grid *ngIf="addFolderPermissionDisplay || editFolderPermission">
+        <!-- <div class="top"> -->
+        <ion-title *ngIf="addFolderPermissionDisplay">{{'Add Folder Permission' | translate}}</ion-title>
+        <ion-title *ngIf="editFolderPermission">{{'Edit Folder Permission' | translate }}</ion-title>
+        <!-- </div> -->
+        <form [formGroup]="addPermissionForm" (ngSubmit)="submitFolderPermission()">
+            <ion-item no-margin no-lines style="border-bottom: 1px solid #ccc">
+                <ion-label>{{'Access Level' | translate }}</ion-label>
+                <ion-select formControlName="accessMask" interface="popover" (ionChange)="accessLevelChanged($event)">
+                    <ion-option *ngFor="let value of folderPermissionModelDropdown" [value]="value.value">{{value.label}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-row no-margin class="borderBtm">
+                <ion-col col-4 no-padding>
+                    <ion-label class="roleName">{{'Role Name' | translate }}</ion-label>
+                </ion-col>
+                <ion-col col-8 no-padding *ngIf="addFolderPermissionDisplay">
+                    <ion-searchbar (ionInput)="autoCompleteKeyUp($event)" formControlName="granteeName" placeholder="{{'Search' | translate }}"></ion-searchbar>
+                    <ion-list *ngIf="getroleList">
+                        <ion-item *ngFor="let item of getroleList" (click)="selectRoleName(item)" class="whitespa">
+                            {{ item.name }}
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+                <ion-col col-8 no-padding *ngIf="editFolderPermission">
+                    <ion-input disabled="true" [value]="selectedRoleObject.name" class="textRight" clearInput></ion-input>
+                </ion-col>
+            </ion-row>
+
+            <ion-row no-margin>
+                <!-- <ion-col col-3></ion-col> -->
+                <ion-col col-6 no-padding class="textRight" *ngIf="addFolderPermissionDisplay">
+                    <button ion-button type="submit" class="addWidth btnRadius"><ion-icon name="add-circle" ></ion-icon>{{'Add' | translate }}</button>
+                </ion-col>
+                <ion-col col-6 no-padding class="textRight" *ngIf="editFolderPermission">
+                    <button ion-button type="submit" class="addWidth btnRadius"><ion-icon name="create" ></ion-icon>{{'Edit' | translate }}</button>
+                </ion-col>
+                <ion-col col-6 no-padding class="textLeft">
+                    <button ion-button type="button" (click)="cancelAdd()" class="btnRadius"><ion-icon name="close"></ion-icon>{{'Cancel' | translate}}</button>
+                </ion-col>
+            </ion-row>
+        </form>
+
+    </ion-grid>
+</ion-content>

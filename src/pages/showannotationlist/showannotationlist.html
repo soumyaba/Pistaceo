@@ -1,0 +1,74 @@
+<!--
+  Generated template for the ShowannotationlistPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-row>
+            <ion-col col-10>
+                <ion-title>{{'Annotation List' | translate }}</ion-title>
+            </ion-col>
+            <ion-col col-2 no-padding>
+                <button ion-button (click)="close()" round class="topbtn">
+                  <ion-icon name="close" ></ion-icon>
+                </button>
+            </ion-col>
+        </ion-row>
+
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <!-- <ion-item *ngIf="listOfDcumentAnnotation.length > 0" no-padding>
+        <ion-row no-margin class="whiteSpace">
+            <ion-col col-4 no-padding>
+                <b>{{'User Name' | translate }}</b>
+            </ion-col>
+            <ion-col col-3 no-padding>
+                <b> {{'Status' | translate }}</b>
+            </ion-col>
+            <ion-col col-3 no-padding>
+                <b>{{'Type' | translate}}</b>
+            </ion-col>
+            <ion-col col-2 no-padding>
+                <b>{{'Page Nor' | translate }}</b>
+            </ion-col>
+        </ion-row>
+    </ion-item> -->
+    <ion-grid no-padding *ngIf="listOfDcumentAnnotation.length > 0">
+        <ion-row>
+            <ion-col col-12 no-padding>
+                <ion-list no-margin>
+                    <ion-item-sliding border [ngClass]="animateClass" *ngFor="let item of listOfDcumentAnnotation; let i = index;" #slidingItem no-padding>
+                        <ion-item border no-lines (click)="itemClick(item)" no-padding>
+                            <ion-row no-margin class="whiteSpace title">
+                                <ion-col col-1></ion-col>
+                                <ion-col col-5 no-padding>
+                                    <h6 item-title class="title"> {{item.userName}}</h6>
+                                    <h6 item-title class="title topGap"> {{item.status}}</h6>
+                                </ion-col>
+                                <ion-col col-1 no-padding>
+
+                                </ion-col>
+                                <ion-col col-5 no-padding>
+                                    <h6 item-title class="title">{{item.type}}</h6>
+                                    <h6 item-title class="title topGap">{{'P'}} {{item.pageNo}}</h6>
+                                </ion-col>
+                            </ion-row>
+                        </ion-item>
+                    </ion-item-sliding>
+
+                </ion-list>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-row *ngIf="listOfDcumentAnnotation.length === 0" text-center>
+        <ion-title text-center class="title"> {{'No annotation found on this document' | translate }}</ion-title>
+    </ion-row>
+
+</ion-content>

@@ -1,0 +1,68 @@
+page-checkin-file {
+    .textalign {
+        text-align: right;
+    }
+    .topbtn {
+        border-radius: 70% !important;
+        padding: 13px !important;
+        box-shadow: 3px 3px 7px 1px #ccc;
+        width: 41px;
+        height: 41px;
+    }
+    .toolbar .toolbar-title {
+        text-align: center !important;
+        margin-top: 7px !important;
+    }
+    .attchfiles {
+        opacity: 1;
+        // font-size: 14px;
+        // font-weight: 500;
+    }
+    .redStar {
+        color: rgb(236, 29, 29);
+    }
+    .removebtn {
+        font-size: 1rem;
+        width: 30px;
+        height: 30px;
+        opacity: 0.7;
+    }
+    #docfile {
+        position: absolute;
+        opacity: 0;
+        display: none !important;
+    }
+    .textCenter {
+        text-align: center;
+    }
+    .btnWidth {
+        width: 109px;
+    }
+    .btnRadius {
+        border-radius: 5px;
+    }
+    .textLeft {
+        text-align: left;
+    }
+    .textRight {
+        text-align: right;
+    }
+    ion-label {
+        white-space: unset !important;
+    }
+    .item-input .label-md,
+    .item-select .label-md,
+    .item-datetime .label-md {
+        color: #000 !important;
+    }
+    .item-md .item-button[icon-only] ion-icon,
+    .item-md .item-button[icon-only] {
+        border-radius: 50% !important;
+        width: 30px;
+        height: 30px;
+    }
+    .item-md .item-button[icon-only] ion-icon,
+    .item-md .item-button[icon-only] {
+        padding: 4px 0px;
+    }
+}

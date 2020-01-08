@@ -1,0 +1,135 @@
+    page-property {
+        .label-md {
+            margin: 0 !important;
+        }
+        .propertiesCss {
+            padding: 15px;
+            background: #246275;
+            color: #fff;
+        }
+        .item-md.item-block .item-inner {
+            padding-right: 0 !important;
+            border-bottom: 1px solid #dedede;
+        }
+        h5:first-child,
+        [padding] h6:first-child {
+            margin-top: 10px !important;
+        }
+        .textalign {
+            text-align: right
+        }
+        .paddLeft {
+            padding-left: 13px;
+        }
+        // .item-input .label-md,
+        // .item-select .label-md,
+        // .item-datetime .label-md {
+        //     color: #000 !important;
+        //     opacity: 0.5 !important;
+        // }
+        .labelColor ion-label {
+            color: #8e8e93 !important;
+        }
+        .whiteSpace {
+            white-space: initial !important;
+        }
+        .padding0 {
+            padding: 0 !important;
+        }
+        .textleft {
+            text-align: left !important;
+        }
+        .iconcolor {
+            color: #fff;
+        }
+        .greenIcon {
+            color: #246275;
+        }
+        .textRight {
+            text-align: right;
+        }
+        .addWidth {
+            width: 109px;
+        }
+        .btnRadius {
+            border-radius: 5px;
+            color: #fff;
+        }
+        .toolbar-title-md {
+            margin-top: 9px !important;
+            margin-bottom: 10px !important;
+            text-align: center;
+            color: #246275;
+        }
+        ul.accordion {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        /* Hide the radio buttons */
+        /* These are what allow us to toggle content panes */
+        ul.accordion label+input[type='radio'] {
+            display: none;
+        }
+        /* Give each content pane some styles */
+        ul.accordion li {
+            background-color: #fff;
+            border: 1px solid #DDDDDD;
+            box-shadow: 1px 1px 1px 1px #ccc;
+        }
+        /* Make the main tab look more clickable */
+        ul.accordion label {
+            background-color: #246275;
+            color: #FFFFFF;
+            display: block;
+            padding: 10px;
+        }
+        ul.accordion label:hover {
+            cursor: pointer;
+            background-color: #7CB342;
+        }
+        /* Set up the div that will show and hide */
+        ul.accordion div.content {
+            overflow: hidden;
+            padding: 0 10px;
+            display: none;
+        }
+        /* Show the content boxes when the radio buttons are checked */
+        ul.accordion label+input[type='radio']:checked+div.content {
+            display: block;
+        }
+        .button[icon-only] {
+            border-radius: 50%;
+            width: 39px;
+        }
+        ion-grid {
+            padding: 0 !important;
+        }
+        ion-select {
+            max-width: 70% !important;
+        }
+        .item-md {
+            padding-left: 0 !important;
+        }
+        ion-app.md [padding] .scroll-content {
+            padding: 10px !important;
+        }
+        .searchbar-md .searchbar-input {
+            background-color: #fff !important;
+        }
+        .historyScroll {
+            max-height: 220px;
+            overflow-y: auto;
+        }
+        .title {
+            font-size: 13px !important;
+            text-overflow: inherit;
+            white-space: normal;
+        }
+        .topGap {
+            margin-top: 13px;
+        }
+        .text {
+            font-size: 13px;
+        }
+    }

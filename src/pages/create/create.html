@@ -1,0 +1,112 @@
+<!--
+  Generated template for the CreatePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <button ion-button menuToggle>
+          <ion-icon class="icon-menu" name="menu"></ion-icon>
+        </button>
+        <div buy>
+            <ion-title>{{'Create' | translate }}</ion-title>
+        </div>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-segment [(ngModel)]="showSegments">
+        <ion-segment-button value="showCreate" *ngIf="showcreate === true" (click)="segmentChanged($event)">
+            {{'Create' | translate}}
+        </ion-segment-button>
+        <ion-segment-button value="showForm" *ngIf="showform === true">
+            {{createformtitle | translate }}
+        </ion-segment-button>
+    </ion-segment>
+    <div [ngSwitch]="showSegments">
+        <div *ngSwitchCase="'showCreate'">
+            <form [formGroup]="form" (ngSubmit)="onsubmit(form)">
+                <ion-row class="rowPad">
+                    <ion-col col-3 no-padding>
+                        <ion-label>{{'Subject' | translate }}</ion-label>
+                    </ion-col>
+                    <ion-col col-9 no-padding>
+                        <ion-item no-margin no-lines>
+                            <ion-input type="text" placeholder="{{'Subject' | translate}}" formControlName="subject" [dir]="rtlSupport"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <div *ngIf="showDoc">
+                    <ion-row class="rowPad">
+                        <ion-col col-3 no-padding>
+                            <ion-label>{{'To do' | translate }}</ion-label>
+                        </ion-col>
+                    </ion-row>
+                    <div *ngFor="let item of activitytype.docTypes">
+                        <ion-row no-margin class="row-box">
+                            <ion-col col-1 no-padding>
+                                <span *ngIf="item.type === 'DOCUMENT'">
+                                            <img src="assets/images/Docs-icon.png" class="topPad left" height="20px" width="20px">
+                                        </span>
+                                <span *ngIf="item.type === 'FORM'">
+                                            <img src="assets/images/forms.png" class="topPad left" height="20px" width="20px">
+                                        </span>
+                            </ion-col>
+                            <ion-col col-6 no-padding>
+                                {{item.name | translate}}<sup class="redstar" *ngIf="(item.req === 1 &&  item.name !== 'Attachment') || (item.name === 'Attachment' && item.req === 1 &&  attachDocNonMandetory === false)">*</sup>
+                            </ion-col>
+                            <ion-col col-5 no-padding *ngIf="item.type === 'FORM'">
+                                <ion-row no-margin>
+                                    <ion-col col-8 no-padding><a (click)="documentForm(item)"><u class="themeText"> {{item.name}}</u></a></ion-col>
+                                    <ion-col col-2 no-padding *ngIf="item.showgreentich === true">
+                                        <ion-icon icon-small name="checkmark-circle" class="greentick">
+                                        </ion-icon>
+                                    </ion-col>
+                                    <ion-col col-2 no-padding *ngIf="item.showadd === true && showaddlabel === '1'"></ion-col>
+                                    <ion-col col-2 no-padding *ngIf="item.showdelete === true"></ion-col>
+                                </ion-row>
+
+                            </ion-col>
+                            <ion-col col-5 no-padding *ngIf="item.type === 'DOCUMENT'">
+                                <ion-row no-margin>
+                                    <ion-col col-12 no-padding>
+                                        <input type="file" accept="application/msword,application/pdf,image/*" (click)="tempObject(item.id , item.name)" (change)="inputfileChanged($event, item.id, item.docclass)" id="fileInput" multiple="true" />
+                                        <label class="attachFiles" for="fileInput" icon-only ion-button text-center>
+                                                <ion-icon name="attach"></ion-icon>
+                                        </label>
+                                    </ion-col>
+                                </ion-row>
+
+                            </ion-col>
+                            <ion-col col-12 *ngIf="tempAttachments.length > 0 && item.type !== 'FORM'">
+                                <ion-row no-margin *ngFor="let value of tempAttachments; let amt = index">
+                                    <ion-col col-10 no-padding>
+                                        <ion-label class="whiteSpace">{{value.docTitle}}</ion-label>
+                                    </ion-col>
+                                    <ion-col col-2 no-padding class="text-center">
+                                        <ion-icon icon-only name="close-circle" class="removeIcons" (click)="removeAttachments(value, amt)"></ion-icon>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-col>
+                        </ion-row>
+
+                    </div>
+                </div>
+                <br>
+                <ion-row no-margin class="text-center">
+                    <ion-col col-12 no-padding>
+                        <button ion-button small type="submit" class="border-radius"><ion-icon icon-left name="create"></ion-icon>{{'Create' | translate }}</button>
+                    </ion-col>
+                </ion-row>
+            </form>
+        </div>
+        <div *ngSwitchCase="'showForm'">
+            <dynamic-form [dynamicFormJSON]="formObject" [createformtitle]="createformtitle" (formJSONOutput)="formDynamicSubmit($event)" [activityType]="type" (formCancel)="cancelForm($event)"></dynamic-form>
+        </div>
+
+    </div>
+</ion-content>

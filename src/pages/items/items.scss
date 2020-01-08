@@ -1,0 +1,25 @@
+ion-header {
+    ion-navbar {
+        [buy] {
+            .title-ios {
+                width: 90%;
+            }
+            .button-ios {
+                height: 3rem !important;
+                position: absolute;
+                right: 5px;
+                top: 20px !important;
+            }
+            ion-title {
+                width: 70%;
+            }
+            [defoult-button] {
+                background: #246275;
+                color: #fff;
+                position: absolute;
+                right: 5px;
+                top: 5px;
+            }
+        }
+    }
+}

@@ -1,0 +1,182 @@
+    page-activity {
+        .list-md .item[no-lines],
+        .list-md .item[no-lines] .item-inner {
+            border-width: 0;
+            padding: 0;
+        }
+        .input-wrapper {
+            border-bottom: 1px solid #ccc !important;
+        }
+        .zoom-in {
+            -webkit-animation: zoomIn 900ms;
+            -moz-animation: zoomIn 900ms;
+            -o-animation: zoomIn 900ms;
+            animation: zoomIn 900ms;
+        }
+        .line-break {
+            overflow: inherit;
+            text-overflow: inherit;
+            white-space: normal;
+        }
+        .redStar {
+            color: orangered;
+        }
+        .textAlign {
+            text-align: center;
+        }
+        .labelWidth {
+            width: 28% !important;
+        }
+        h6 {
+            margin-left: 15px !important;
+            text-align: left !important;
+        }
+        .select-searchable {
+            max-width: 70% !important;
+        }
+        ion-select {
+            max-width: 60% !important;
+        }
+        .slick-slide {
+            opacity: 1;
+            transition: opacity 300ms ease-in-out;
+        }
+        .slick-slide.opacidown {
+            opacity: 0;
+        }
+        ion-slide.swiper-slide {
+            align-items: flex-start;
+        }
+        .pageNumber {
+            font-size: 20px;
+            color: #246275;
+        }
+        .textslide {
+            min-height: 640px;
+        }
+        #fileInput {
+            position: absolute;
+            opacity: 0;
+            display: none !important;
+        }
+        .attchfiles {
+            opacity: 0.5;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .docTitle {
+            font-size: 15px;
+            margin-left: 10px;
+        }
+        .removeIcon {
+            margin-top: -10%;
+            font-size: 15px;
+        }
+        .comments {
+            font-size: 14px;
+            opacity: 0.6;
+            margin-left: 7px;
+            margin-top: 3px;
+        }
+        ion-title {
+            margin-top: 7px;
+        }
+        button {
+            background-color: Transparent;
+            background-repeat: no-repeat;
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
+            outline: none;
+        }
+        .padding0 {
+            padding: 0;
+        }
+        // .styleicons:hover {
+        //     // background: #7cb342;
+        //     padding: 0px;
+        //     // border-radius: 50%;
+        // }
+        // .color:hover {
+        //     color: #fff;
+        // }
+        signature-pad {
+            max-width: 100%;
+            height: auto;
+        }
+        .topbtnActive {
+            border-radius: 70% !important;
+            padding: 13px !important;
+            box-shadow: 2px 1px 3px 1px #ccc;
+            width: 41px;
+            height: 41px;
+        }
+        .showimpbtns {
+            background-color: #7cb342;
+        }
+        .hideimpbtns {
+            background-color: #246275;
+        }
+        .countamt {
+            position: absolute;
+            background-color: red;
+            color: white;
+            z-index: 999;
+            border-radius: 50%;
+            -webkit-box-shadow: 1px 1px 1px grey;
+            box-shadow: 1px 1px 1px grey;
+            font-size: 13px;
+        }
+        .count10 {
+            padding: 5px;
+        }
+        .count0 {
+            padding: 3px 7px 3px 6px;
+        }
+        .count100 {
+            padding: 5px 3px 5px 2px;
+        }
+        .whiteSpace {
+            white-space: initial;
+        }
+        .textleft {
+            text-align: left;
+        }
+        .download {
+            color: #246275;
+            font-size: 25px !important;
+        }
+        .font-weight {
+            font-weight: 300;
+        }
+        .iconColor {
+            color: #246275;
+        }
+        .textarea-Border {
+            border: 1px solid #cccccc;
+        }
+        .formStyle {
+            color: #246275;
+            margin-left: -37%;
+        }
+        .greenTicked {
+            font-size: 25px;
+            color: #7cb342;
+        }
+        .btnHt {
+            height: 33px;
+        }
+        .histroyItems {
+            text-overflow: inherit;
+            white-space: normal;
+            margin-top: 13px;
+            font-size: 13px !important;
+        }
+        .text-input-md {
+            font-size: 13px !important;
+        }
+        .label-md {
+            font-size: 13px !important;
+            // line-height: 0 !important;
+        }
+    }

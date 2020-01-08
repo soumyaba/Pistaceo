@@ -1,0 +1,65 @@
+page-annotations {
+    .zoom-in {
+        -webkit-animation: zoomIn 900ms;
+        -moz-animation: zoomIn 900ms;
+        -o-animation: zoomIn 900ms;
+        animation: zoomIn 900ms;
+    }
+    .button[icon-only] {
+        border-radius: 50%;
+        width: 43px;
+        height: 43px;
+    }
+    button {
+        background-color: Transparent;
+        background-repeat: no-repeat;
+        border: none;
+        cursor: pointer;
+        overflow: hidden;
+        outline: none;
+    }
+    .padding0 {
+        padding: 0;
+    }
+    .styleicons:hover {
+        background-color: #7CB342;
+        padding: 3px;
+        border-radius: 50%;
+    }
+    .pageNumber {
+        font-size: 20px;
+        color: #246275;
+        text-align: center;
+    }
+    .color:hover {
+        color: #fff;
+    }
+    #viewport {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        // background-color: #000;
+        overflow: hidden;
+    }
+    .wrapper {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        margin-top: -80px;
+    }
+    .wrapper>signature-pad {
+        width: 100%;
+        display: block;
+        height: auto;
+    }
+    .gap {
+        margin-top: 50px;
+    }
+    button.swiper-pagination-bullet {
+        opacity: 0 !important;
+    }
+    .titleColor {
+        color: #246275;
+    }
+}

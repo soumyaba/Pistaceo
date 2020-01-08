@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <!-- <div buy *ngIf="isBuyButtonEnabled"> -->
+        <div buy>
+            <ion-title>{{title}}</ion-title>
+            <!-- <button ion-button defoult-button onclick="window.open('https://codecanyon.net/item/ionic-3-ui-theme-template-app-ios-11-style-green-light/20884976?s_rank=1?ref=CreativeForm')">
+        BUY NOW
+      </button> -->
+        </div>
+        <!-- <ion-title text-capitalize>{{title}}</ion-title>-->
+    </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+    <ion-list no-padding no-margin no-lines *ngIf="pages.length">
+        <button ion-item item-title paddinge-left border *ngFor="let p of pages" (click)="openPage(p)">
+        {{p.title}}
+    </button>
+    </ion-list>
+</ion-content>

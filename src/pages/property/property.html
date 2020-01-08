@@ -1,0 +1,444 @@
+<!--
+  Generated template for the PropertyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content padding style="margin-top:49px">
+    <ul class='accordion whiteSpace text'>
+        <li class="padding0 labelColor">
+            <label for='cp-1'>{{'Properties' | translate}}</label>
+            <input type='radio' name='a' id='cp-1' checked='checked'>
+            <div class='content'>
+                <ion-item item-content no-lines no-padding>
+                    <ion-row no-margin class="text">
+                        <ion-col col-8 class="paddLeft" no-padding>
+
+                        </ion-col>
+                        <ion-col col-2></ion-col>
+                        <ion-col col-2 class="textalign" no-padding>
+                            <button ion-button icon-only (click)="editProperty()">
+                            <ion-icon name="create" ></ion-icon>
+                        </button>
+                        </ion-col>
+                    </ion-row>
+                </ion-item>
+                <form [formGroup]="editProp" (ngSubmit)="editSubmit($event)" *ngIf="docProperty" class="text">
+                    <ion-item no-lines no-padding class="labelColor text">
+                        <ion-grid item-content>
+                            <ion-row no-margin>
+                                <ion-col col-4 no-padding>
+                                    <ion-label>{{'Doc Class' | translate }}</ion-label>
+                                </ion-col>
+                                <ion-col col-8 no-padding>
+                                    {{docPropertyName}}
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-item>
+                    <ion-item *ngFor="let prop of documentPropertyProps" no-padding class="text">
+                        <ion-grid item-content *ngIf="prop.dtype !== 'OBJECT'">
+                            <ion-row no-margin>
+                                <ion-col col-4 no-padding>
+                                    <ion-label class="whiteSpace text">{{prop.name}}</ion-label>
+                                </ion-col>
+                                <ion-col col-8 no-padding *ngIf="prop.dtype === 'STRING'">
+                                    <ion-input id="{{prop.symName}}" type="text" [value]="prop.mvalues[0]" [disabled]="prop.rOnly === true || propertyEdit === false" [formControlName]="prop.symName" placeholder="Enter {{prop.name}}" clearInput [dir]="rtlSupport"></ion-input>
+                                </ion-col>
+                                <!-- <ion-col col-8 no-padding *ngIf="prop.dtype==='STRING' && prop.lookups !==u ndefined ">
+                                        <ion-select interface="popover " (ionChange)="lookupChanged($event) ">
+                                            <ion-option *ngFor="let value of prop.looups " [value]="value.value ">{{value.label}}</ion-option>
+                                        </ion-select>
+                                    </ion-col> -->
+                                <ion-col col-8 no-padding *ngIf="prop.dtype === 'DATE'">
+                                    <ion-datetime displayFormat="DD/MM/YYYY" id="{{prop.symName}}" placeholder="Select {{prop.name}}" [formControlName]="prop.symName" [dir]="rtlSupport"></ion-datetime>
+                                </ion-col>
+                                <ion-col col-8 no-padding *ngIf="prop.dtype === 'LONG'">
+                                    <ion-input id="{{prop.symName}}" type="number" [value]="prop.mvalues[0]" [disabled]="prop.rOnly === true || propertyEdit === false" [formControlName]="prop.symName" clearInput [dir]="rtlSupport"></ion-input>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-item>
+                    <ion-row no-margin *ngIf="propertyEdit">
+                        <ion-col col-7 class="textalign">
+                            <button ion-button type="submit" [disabled]="editProp.invalid"><ion-icon name="bookmark"></ion-icon>{{'Save' |  translate }}</button>
+                        </ion-col>
+                    </ion-row>
+                </form>
+            </div>
+        </li>
+
+        <li class="padding0" *ngIf="docProperty">
+            <label for='cp-2'>{{'Versions' | translate }}</label>
+            <input type='radio' name='a' id='cp-2'>
+            <div class='content'>
+                <ion-grid no-padding>
+                    <ion-row no-padding>
+                        <ion-col col-12 no-padding>
+                            <ion-list no-margin>
+                                <ion-item-sliding *ngFor="let version of versionsList; let i = index" #slidingItem no-padding class="textleft" no-lines>
+                                    <ion-item border no-lines class="textleft text" no-padding>
+                                        <ion-row no-margin>
+                                            <ion-col col-6 no-padding>
+                                                <h6 item-title class="title">{{version.creator}}</h6>
+                                                <h6 item-title class="title topGap"> {{version.format}}</h6>
+                                            </ion-col>
+                                            <ion-col col-1></ion-col>
+                                            <ion-col col-5 no-padding>
+                                                <h6 item-title class="title"> {{version.modifier}}</h6>
+                                                <h6 item-title class="title topGap">{{'V' | translate}} {{version.verNo}}</h6>
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-item>
+                                    <ion-item-options no-lines side="right" dir="ltr">
+                                        <button ion-button text-capitalize padding (click)="downloadDocuments(version)">
+                                                       <ion-icon name="download" class="iconcolor"></ion-icon>
+                                        </button>
+                                    </ion-item-options>
+                                </ion-item-sliding>
+                            </ion-list>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+        </li>
+
+        <li class="padding0 labelColor" *ngIf="docProperty">
+            <label for='cp-3'>{{'System Properties' | translate }}</label>
+            <input type='radio' name='a' id='cp-3'>
+            <div class='content text'>
+                <ion-item no-lines no-padding class="text">
+                    <ion-grid item-content>
+                        <ion-row no-margin>
+                            <ion-col col-4 no-padding>
+                                <ion-label>{{'Doc Class' | translate }}</ion-label>
+                            </ion-col>
+                            <ion-col col-8 no-padding>
+                                {{docProperty.docclass}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-item>
+                <ion-item no-lines no-padding class="text">
+                    <ion-grid item-content>
+                        <ion-row no-margin>
+                            <ion-col col-4 no-padding>
+                                <ion-label>{{'Created By' | translate}}</ion-label>
+                            </ion-col>
+                            <ion-col col-8 no-padding>
+                                {{docProperty.creator}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-item>
+                <ion-item no-lines no-padding class="text">
+                    <ion-grid item-content>
+                        <ion-row no-margin>
+                            <ion-col col-4 no-padding>
+                                <ion-label>{{'Modifier' | translate }}</ion-label>
+                            </ion-col>
+                            <ion-col col-8 no-padding>
+                                {{docProperty.modifier}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-item>
+                <ion-item no-lines no-padding class="text">
+                    <ion-grid item-content>
+                        <ion-row no-margin>
+                            <ion-col col-4 no-padding>
+                                <ion-label>{{'Created On' | translate }}</ion-label>
+                            </ion-col>
+                            <ion-col col-8 no-padding>
+                                {{docProperty.addOn}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-item>
+                <ion-item no-lines no-padding class="text">
+                    <ion-grid item-content>
+                        <ion-row no-margin>
+                            <ion-col col-4 no-padding>
+                                <ion-label>{{'Modified On' | translate }}</ion-label>
+                            </ion-col>
+                            <ion-col col-8 no-padding>
+                                {{docProperty.modOn}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-item>
+                <ion-item no-lines no-padding class="text">
+                    <ion-grid item-content>
+                        <ion-row no-margin>
+                            <ion-col col-4 no-padding>
+                                <ion-label>{{'Size' | translate }}</ion-label>
+                            </ion-col>
+                            <ion-col col-8 no-padding>
+                                {{docProperty.size}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-item>
+                <ion-item no-lines no-padding class="text">
+                    <ion-grid item-content>
+                        <ion-row no-margin>
+                            <ion-col col-4 no-padding>
+                                <ion-label>{{'Format' | translate }}</ion-label>
+                            </ion-col>
+                            <ion-col col-8 no-padding>
+                                {{docProperty.format}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-item>
+            </div>
+        </li>
+
+        <li class="padding0" *ngIf="docProperty">
+            <label for='cp-4'>{{'Permission' | translate }}</label>
+            <input type='radio' name='a' id='cp-4'>
+            <div class='content'>
+                <ion-item item-content no-lines no-padding>
+                    <ion-row no-margin>
+                        <ion-col col-8 class="paddLeft" no-padding>
+
+                        </ion-col>
+                        <ion-col col-4 class="textalign" no-padding>
+                            <button ion-button icon-only (click)="addFolderPermission()">
+                                    <ion-icon name="person-add" ></ion-icon>
+                                </button>
+                        </ion-col>
+                    </ion-row>
+                </ion-item>
+                <!-- <ion-item item-content>
+                    <ion-row no-margin>
+                        <ion-col col-4 no-padding class="whiteSpace text">
+                            <b>{{'Grantee Name' | translate }}</b>
+                        </ion-col>
+                        <ion-col col-4 no-padding class="whiteSpace text">
+                            <b>
+                                                {{'Access Level' | translate }}
+                                            </b>
+                        </ion-col>
+                        <ion-col col-4 no-padding class="whiteSpace text">
+                            <b>
+                                                {{'Permission Source' | translate }}
+                                            </b>
+                        </ion-col>
+                    </ion-row>
+                </ion-item> -->
+                <ion-list no-margin *ngIf="documentPermission" no-lines class="overflowList labelColor text">
+                    <ion-item-sliding *ngFor="let permission of documentPermission; let i = index;" #slidingItem no-lines>
+                        <ion-item border no-lines no-padding class="text">
+                            <ion-grid item-content>
+                                <ion-row no-margin>
+                                    <ion-col col-1 no-padding>
+                                    </ion-col>
+                                    <ion-col col-11 no-padding>
+                                        <h6 item-title class="title">{{permission.granteeName}}</h6>
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row no-margin>
+                                    <ion-col col-1 no-padding>
+                                    </ion-col>
+                                    <ion-col col-5 no-padding>
+                                        <h6 item-title class="title topGap">{{permission.accessLevel}}</h6>
+                                    </ion-col>
+                                    <ion-col col-1 no-padding>
+                                    </ion-col>
+                                    <ion-col col-5 no-padding>
+                                        <h6 item-title class="title topGap">{{permission.permissionSource}}</h6>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-item>
+                        <ion-item-options side="right" dir="ltr">
+                            <button ion-button>
+                                          <ion-icon name="create"  (click)="editFolderPermissions(permission)" *ngIf="permission.permissionSource === 'Direct' && showEdit">
+                                        </ion-icon>
+                                      </button>
+                            <button ion-button><ion-icon name="trash"  *ngIf="showEdit" (click)="folderDeletePermissions(permission)">
+                                        </ion-icon ></button>
+                        </ion-item-options>
+                    </ion-item-sliding>
+                </ion-list>
+                <ion-grid *ngIf="addFolderPermissionDisplay || editFolderPermission" class="labelColor">
+                    <ion-title *ngIf="addFolderPermissionDisplay">Add Permission</ion-title>
+                    <ion-title *ngIf="editFolderPermission">Edit Permission</ion-title>
+                    <form [formGroup]="addPermissionForm" (ngSubmit)="submitFolderPermission()">
+                        <ion-item no-margin no-lines style="border-bottom: 1px solid #ccc" class="text">
+                            <ion-label>{{'Access Level' | translate }}</ion-label>
+                            <ion-select formControlName="accessMask" interface="popover" (ionChange)="accessLevelChanged($event)">
+                                <ion-option *ngFor="let value of folderPermissionModelDropdown" [value]="value.value">{{value.label}}</ion-option>
+                            </ion-select>
+                        </ion-item>
+                        <ion-row no-margin class="borderBtm text">
+                            <ion-col col-4 no-padding>
+                                <ion-label class="roleName">{{'Role Name' | translate }}</ion-label>
+                            </ion-col>
+                            <ion-col col-8 no-padding *ngIf="addFolderPermissionDisplay">
+                                <ion-searchbar (ionInput)="autoCompleteKeyUp($event)" formControlName="granteeName"></ion-searchbar>
+                                <ion-list *ngIf="getroleList">
+                                    <ion-item *ngFor="let item of getroleList" (click)="selectRoleName(item)" class="whitespa">
+                                        {{ item.name }}
+                                    </ion-item>
+                                </ion-list>
+                            </ion-col>
+                            <ion-col col-8 no-padding *ngIf="editFolderPermission">
+                                <ion-input disabled="true" [value]="selectedRoleObject.name" class="textRight" clearInput></ion-input>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row no-margin>
+                            <ion-col col-6 no-padding class="textRight" *ngIf="addFolderPermissionDisplay">
+                                <button ion-button type="submit" class="addWidth btnRadius iconcolor"><ion-icon name="add-circle" ></ion-icon>{{'Add' | translate }}</button>
+                            </ion-col>
+                            <ion-col col-6 no-padding class="textRight" *ngIf="editFolderPermission">
+                                <button ion-button type="submit" class="addWidth btnRadius iconcolor"><ion-icon name="create" ></ion-icon>{{'Edit' | translate }}</button>
+                            </ion-col>
+                            <ion-col col-6 no-padding class="textLeft">
+                                <button ion-button type="button" (click)="cancelAdd()" class="btnRadius iconcolor"><ion-icon name="close"></ion-icon>{{'Cancel' | translate }}</button>
+                            </ion-col>
+                        </ion-row>
+                    </form>
+                </ion-grid>
+            </div>
+        </li>
+
+        <li class="padding0 labelColor" *ngIf="docProperty">
+            <label for='cp-5'>{{'Path' | translate }}</label>
+            <input type='radio' name='a' id='cp-5'>
+            <div class='content'>
+                <ion-item no-lines no-padding class="text">
+                    <ion-grid item-content>
+                        <ion-row no-margin *ngFor="let foldername of folderFileName; let i = index">
+                            <ion-col col-1 *ngIf="i === 0"></ion-col>
+                            <ion-col col-3 no-padding *ngIf="i === 0">
+                                <ion-label>{{'Path' | translate }}</ion-label>
+                            </ion-col>
+                            <ion-col col-8 no-padding *ngIf="i === 0 ">
+                                {{foldername.path}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-item>
+            </div>
+        </li>
+        <li class="padding0 labelColor" *ngIf="docProperty">
+            <label for='cp-6'>{{'Annotations' | translate }}</label>
+            <input type='radio' name='a' id='cp-6'>
+            <div class='content'>
+                <!-- <ion-item no-lines no-padding *ngIf="listOfDcumentAnnotation.length > 0">
+                    <ion-grid item-content no-padding>
+                        <ion-row no-margin>
+                            <ion-col col-4 no-padding><b>{{'User Name' | translate }}</b></ion-col>
+                            <ion-col col-3 no-padding><b>{{'Status' | translate }}</b></ion-col>
+                            <ion-col col-3 no-padding><b>{{'Type' | translate }}</b></ion-col>
+                            <ion-col col-2 no-padding>
+                                <b>{{'Page Nor' | translate }}</b>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-item> -->
+                <ion-list no-margin *ngIf="listOfDcumentAnnotation.length > 0">
+                    <ion-item-sliding *ngFor="let annoatation of listOfDcumentAnnotation; let i = index" #slidingItem no-padding class="textleft" no-lines>
+                        <ion-item no-lines no-padding>
+                            <ion-grid item-content no-padding>
+                                <ion-row no-margin>
+                                    <ion-col col-6 no-padding>
+                                        <h6 item-title class="title">{{annoatation.userName}}</h6>
+                                        <h6 itm-title class="title topGap">{{annoatation.status}}</h6>
+                                    </ion-col>
+                                    <ion-col col-1 no-padding></ion-col>
+                                    <ion-col col-5 no-padding>
+                                        <h6 item-title class="title">{{annoatation.type}}</h6>
+                                        <h6 item-title class="title topGap"> {{annoatation.pageNo}}</h6>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-item>
+                        <ion-item-options side="right" dir="ltr" (click)="showAnnoataionImage(annoatation)">
+                            <button ion-button>
+                                    <ion-icon name="create" ></ion-icon>
+                            </button>
+                        </ion-item-options>
+                    </ion-item-sliding>
+                </ion-list>
+                <ion-item no-lines *ngIf="listOfDcumentAnnotation.length === 0" class="text">
+                    {{'No any annotations for this document' | translate }}
+                </ion-item>
+            </div>
+        </li>
+        <li class="padding0 labelColor" *ngIf="docProperty">
+            <label for='cp-7'>{{'Document History' | translate }}</label>
+            <input type='radio' name='a' id='cp-7'>
+            <div class='content'>
+                <!-- <ion-item no-lines no-padding *ngIf="showDocumentHistory.length > 0">
+                    <ion-grid item-content no-padding>
+                        <ion-row no-margin>
+                            <ion-col col-4 no-padding><b>{{'User' | translate }}</b></ion-col>
+                            <ion-col col-4 no-padding><b>{{'Action' | translate }}</b></ion-col>
+                            <ion-col col-4 no-padding><b>{{'Timestamp' | translate }}</b></ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-item> -->
+                <ion-list no-margin *ngIf="showDocumentHistory.length > 0" class="historyScroll">
+                    <ion-item *ngFor="let docHistory of showDocumentHistory; let i = index" no-lines no-padding>
+                        <ion-grid border no-lines item-content no-padding>
+                            <ion-row no-margin>
+                                <ion-col col-1 no-padding></ion-col>
+                                <ion-col col-11 no-padding>
+                                    <h6 item-tile class="title">{{docHistory.user}}</h6>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row no-margin>
+                                <ion-col col-1 no-padding></ion-col>
+                                <ion-col col-5 no-padding>
+                                    <h6 itme-title class="title topGap">{{docHistory.eventdesc}}</h6>
+                                </ion-col>
+                                <ion-col col-1 no-padding></ion-col>
+                                <ion-col col-5 no-padding>
+                                    <h6 item-title class="title topGap">{{docHistory.timestamp}}</h6>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-item>
+                </ion-list>
+                <ion-item no-lines *ngIf="showDocumentHistory.length === 0" class="text">
+                    {{'No any History for this document' | translate }}
+                </ion-item>
+            </div>
+
+        </li>
+        <!-- <li class="padding0 labelColor" *ngIf="docProperty">
+            <label for='cp-8'>{{'Document Links' | translate }}</label>
+            <input type='radio' name='a' id='cp-8'>
+            <div class='content'>
+                <ion-item no-lines no-padding *ngIf="documentLinkList.length > 0">
+                    <ion-grid item-content no-padding>
+                        <ion-row no-margin>
+                            <ion-col col-2 no-padding></ion-col>
+                            <ion-col col-8 no-padding><b>{{'Title' | translate }}</b></ion-col>
+                            <ion-col col-2 no-padding></ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-item>
+                <ion-list no-margin *ngIf="documentLinkList.length > 0" class="historyScroll">
+                    <ion-item *ngFor="let docLink of documentLinkList; let i = index" no-lines no-padding>
+                        <ion-grid item-content no-padding>
+                            <ion-row no-margin>
+                                <ion-col col-4 no-padding>{{docHistory.user}}</ion-col>
+                                <ion-col col-4 no-padding>{{docHistory.eventdesc}}</ion-col>
+                                <ion-col col-4 no-padding>{{docHistory.timestamp}}</ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-item>
+                </ion-list>
+                <ion-item no-lines *ngIf="documentLinkList.length === 0">
+                    {{'No any Links for this document' | translate }}
+                </ion-item>
+            </div>
+
+        </li> -->
+    </ul>
+</ion-content>

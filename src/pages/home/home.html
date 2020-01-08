@@ -1,0 +1,252 @@
+<!--Fist Screen-->
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon class="icon-menu" name="menu"></ion-icon>
+    </button>
+        <!-- <div buy *ngIf="isBuyButtonEnabled"> -->
+        <div buy>
+            <!-- <ion-title> -->
+            <ion-row no-margin>
+                <ion-col no-padding col-4>
+                    <h6> {{'Dashboard' | translate }}</h6>
+                </ion-col>
+                <ion-col no-padding col-7 text-right text-wrap>
+                    <p class="userNameStyle">
+                        <ion-icon name="contact"></ion-icon> {{userName}}
+                    </p>
+                </ion-col>
+            </ion-row>
+            <!-- </ion-title> -->
+            <!-- <button ion-button defoult-button onclick="window.open('https://codecanyon.net/item/ionic-3-ui-theme-template-app-ios-11-style-green-light/20884976?s_rank=1?ref=CreativeForm')">
+          BUY NOW
+        </button> -->
+        </div>
+        <!-- <ion-title>{{data.toolbarTitle}}</ion-title> -->
+    </ion-navbar>
+</ion-header>
+<!--Fist Screen Content-->
+<ion-content no-padding>
+    <div *ngIf="userworkItems">
+        <ion-slides pager (ionSlideDidChange)="slideChanged()" no-padding dir="ltr">
+            <!--#Slides zoom="true" -->
+            <ion-slide no-padding>
+                <div [dir]="menuService.rtlSupport">
+                    <ion-card class="headerType">
+                        <ion-card-header class="headerType" style="background: #246275; color: #fff; height: 40px; padding: 10px">
+                            <ion-row>
+                                <ion-col col-4 no-padding text-uppercase>
+                                    {{'Work' |translate }}
+                                </ion-col>
+                                <ion-col col-4 no-padding>
+                                    <select class="form-control selectdrop" (change)="workdatetype($event.target.value)" style="width: 100%;color: #fff; background: #246275; border: none">
+                                        <option value="TODAY" >{{'Today' | translate }}</option>
+                                        <option value="WEEK" selected >{{'Week' | translate }}</option>
+                                        <option value="MONTH">{{'Month' | translate }}</option>
+                                        <option value="YEAR">{{'Year' | translate }}</option>
+                                        <option value="ALL">{{'All' | translate }}</option>
+                                    </select>
+                                </ion-col>
+                                <ion-col col-4 no-padding>
+                                    <select class="form-control selectdrop" (change)="worktype($event.target.value)" style="width: 100%;color: #fff; background: #246275; border: none">
+                                    <option value="TYPE" >{{'Type' | translate }}</option>
+                                    <option value="STATUS" selected>{{'Status' | translate }}</option>
+
+                                </select>
+                                </ion-col>
+                            </ion-row>
+                        </ion-card-header>
+                    </ion-card>
+                    <br>
+                    <ion-row no-margin *ngIf="workLabels.length > 0">
+                        <ion-col col-12 no-padding>
+                            <canvas baseChart [data]="workNumbers" [labels]="workLabels" [chartType]="workChartType" (chartClick)="individualworkclicked($event)" [colors]="chartColors"></canvas>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row text-center *ngIf="workLabels.length === 0">
+                        <ion-col col-12>
+                            <h6 item-title class="title"> {{'No Data Available' | translate }}</h6>
+                        </ion-col>
+                    </ion-row>
+                    <br><br>
+                    <!-- <ion-card class="headerType">
+                    <ion-card-header class="headerType" style="background: #246275; color: #fff; height: 40px; padding: 10px">
+                        <ion-row>
+                            <ion-col col-5 no-padding text-left>
+                                <ion-title>Work Item List</ion-title>
+                            </ion-col>
+                            <ion-col col-7 no-padding text-right>
+                                <ion-searchbar [showCancelButton]="true" (ionInput)="onUserWorkInput($event)" placeholder="Filter Items">
+                                </ion-searchbar>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card-header>
+                </ion-card> -->
+                    <ion-row no-margin>
+                        <ion-col col-5 no-padding text-left>
+                            <ion-title>{{'Work Item List' | translate }}</ion-title>
+                        </ion-col>
+                        <ion-col col-7 no-padding text-right>
+                            <ion-searchbar [showCancelButton]="true" (ionInput)="onUserWorkInput($event)" placeholder="{{'Filter Items' | translate }}" side="right" dir="rtl">
+                            </ion-searchbar>
+                        </ion-col>
+                    </ion-row>
+                    <!-- <ion-item no-padding class="brdrbtm">
+                        <ion-row no-margin text-center>
+                            <ion-col col-1 no-padding>
+                            </ion-col>
+                            <ion-col col-6 no-padding text-center>
+                                {{'Subject' | translate }}
+                                <ion-icon name="funnel" (click)="transformAsscending('subject')"></ion-icon>
+                            </ion-col>
+                            <ion-col col-5 no-padding text-center>
+                                {{'Pending With' | translate }}
+                                <ion-icon name="funnel" (click)="transformAsscending('pendingWith')"></ion-icon>
+                            </ion-col>
+                        </ion-row>
+                    </ion-item> -->
+                    <ion-grid no-padding *ngIf="userworkItems !== undefined">
+                        <ion-row no-margin>
+                            <ion-col col-12 no-padding>
+                                <ion-list no-margin text-left>
+                                    <ion-item-sliding [ngClass]="animateClass" *ngFor="let item of userworkItems; let i = index;" #Slides no-padding>
+                                        <ion-item border no-lines>
+                                            <ion-row no-margin>
+                                                <ion-col col-1 (click)="useritemClick(item)" no-padding text-center>
+                                                    <span [class]="item.status === 'ACTIVE' ? 'active' : 'inactive'">*</span>
+                                                </ion-col>
+                                                <ion-col col-5 (click)="useritemClick(item)" no-padding class="whiteSpace">
+                                                    <!-- <h2 item-title>{{item.createdUserName}}</h2>
+                                                <h2 item-title><span class="subject">{{item.subject}}</span> </h2> -->
+                                                    <h6 item-title class="title"> {{item.subject}}</h6>
+                                                </ion-col>
+                                                <ion-col col-1></ion-col>
+                                                <ion-col col-5 (click)="useritemClick(item)" no-padding>
+                                                    <h6 item-title class="title"> {{item.pendingWith}}</h6>
+                                                </ion-col>
+                                            </ion-row>
+                                        </ion-item>
+                                    </ion-item-sliding>
+
+                                </ion-list>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </div>
+            </ion-slide>
+            <ion-slide>
+                <div [dir]="menuService.rtlSupport">
+                    <ion-card>
+                        <ion-card-header text-uppercase style="background: #246275; color: #fff;height: 40px; padding: 10px">
+                            <ion-row no-margin>
+                                <ion-col col-4 text-uppercase no-padding>
+                                    {{'Activity' | translate }}
+                                </ion-col>
+                                <ion-col col-4 no-padding>
+                                    <select class="form-control selectdrop" (change)="activitydatetype($event.target.value)" style="width: 100%;color: #fff; background: #246275; border: none">
+                                        <option value="TODAY" >{{'Today' | translate }}</option>
+                                        <option value="WEEK" selected >{{'Week' | translate }}</option>
+                                        <option value="MONTH">{{'Month' | translate }}</option>
+                                        <option value="YEAR">{{'Year' | translate }}</option>
+                                        <option value="ALL">{{'All' | translate }}</option>
+                                </select>
+                                </ion-col>
+                                <ion-col col-4 no-padding>
+                                    <select class="form-control selectdrop" (change)="activitytype($event.target.value)" style="width: 100%;color: #fff; background: #246275; border: none">
+                                        <option value="TYPE" >{{'Type' | translate }}</option>
+                                        <option value="STATUS" selected>{{'Status' | translate }}</option>
+
+                                    </select>
+                                </ion-col>
+                            </ion-row>
+                        </ion-card-header>
+                    </ion-card>
+                    <br>
+                    <ion-row no-margin *ngIf="activityLabels.length > 0">
+                        <ion-col col-12 no-padding>
+                            <canvas baseChart [data]="activityNumbers" [labels]="activityLabels" [chartType]="activityChartType" (chartClick)="activityClicked($event)" [colors]="chartColors"></canvas>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row text-center *ngIf="activityLabels.length === 0">
+                        <ion-col col-12>
+                            <h6 item-title class="title"> {{'No Data Available' | translate }}</h6>
+                        </ion-col>
+                    </ion-row>
+                    <br><br>
+                    <ion-row no-margin>
+                        <ion-col col-5 no-padding text-left>
+                            <ion-title>{{'Activity Item List' | translate }}</ion-title>
+                        </ion-col>
+                        <ion-col col-7 no-padding text-right>
+                            <ion-searchbar [showCancelButton]="true" (ionInput)="onUserActivityInput($event)" placeholder="{{'Filter Items' | translate }}">
+                            </ion-searchbar>
+                        </ion-col>
+                    </ion-row>
+                    <!-- <ion-item no-padding class="brdrbtm">
+                        <ion-row no-margin text-center>
+                            <ion-col col-1 no-padding>
+                            </ion-col>
+                            <ion-col col-6 no-padding text-center>
+                                {{'Subject' | translate }}
+                                <ion-icon name="funnel" (click)="transformDescending('subject')"></ion-icon>
+                            </ion-col>
+                            <ion-col col-5 no-padding text-center>
+                                {{'Pending With' | translate }}
+                                <ion-icon name="funnel" (click)="transformDescending('pendingWith')"></ion-icon>
+                            </ion-col>
+                        </ion-row>
+                    </ion-item> -->
+                    <ion-grid no-padding *ngIf="IndividualactivityItems !== undefined">
+                        <ion-row no-margin>
+                            <ion-col col-12 no-padding>
+                                <ion-list no-margin text-left>
+                                    <ion-item-sliding [ngClass]="animateClass" *ngFor="let item of IndividualactivityItems; let i = index;" #Slides no-padding>
+                                        <ion-item border no-lines>
+                                            <ion-row no-margin>
+                                                <ion-col col-1 (click)="useractivityitemClick(item)" no-padding text-center>
+                                                    <span [class]="item.status === 'ACTIVE' ? 'active' : 'inactive'">*</span>
+                                                </ion-col>
+                                                <ion-col col-5 (click)="useractivityitemClick(item)" no-padding class="whiteSpace">
+                                                    <!-- <h2 item-title>{{item.createdUserName}}</h2>
+                                                <h2 item-title><span class="subject">{{item.subject}}</span> </h2> -->
+                                                    <h6 item-title class="title">{{item.subject}}</h6>
+                                                </ion-col>
+                                                <ion-col col-1></ion-col>
+                                                <ion-col col-5 (click)="useractivityitemClick(item)" no-padding>
+                                                    <h6 item-title class="title">{{item.pendingWith}}</h6>
+                                                </ion-col>
+                                            </ion-row>
+                                        </ion-item>
+                                    </ion-item-sliding>
+
+                                </ion-list>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </div>
+            </ion-slide>
+
+        </ion-slides>
+    </div>
+</ion-content>
+<!-- <ion-footer>
+    <ion-row>
+        <ion-col col-4>
+            <span style="color: #246275">  {{'Status' | translate }} &nbsp;-></span>
+        </ion-col>
+        <ion-col col-1 text-right>
+            <span class="active">*</span>
+        </ion-col>
+        <ion-col col-3>
+            <span>: {{'Active' | translate }}</span>
+        </ion-col>
+        <ion-col col-1 text-right>
+            <span class="inactive">*</span>
+        </ion-col>
+        <ion-col col-3>
+            <span>: {{'Complete' | translate }}</span>
+        </ion-col>
+    </ion-row>
+    <br>
+    <!-- *ngIf="onlyAndroid" --
+</ion-footer> -->

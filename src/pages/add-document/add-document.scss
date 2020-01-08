@@ -1,0 +1,103 @@
+page-add-document {
+    @include settingAnimationHeader;
+    .fade-in-left-item {
+        -webkit-animation: fadeInLeft 800ms;
+        -moz-animation: fadeInLeft 800ms;
+        -o-animation: fadeInLeft 800ms;
+        animation: fadeInLeft 800ms;
+    }
+    .toolbar .toolbar-title {
+        text-align: center !important;
+        margin-top: 7px !important;
+    }
+    .topbtn {
+        border-radius: 70% !important;
+        padding: 13px !important;
+        box-shadow: 3px 3px 7px 1px #ccc;
+        width: 41px;
+        height: 41px;
+    }
+    .attchfiles {
+        opacity: 1;
+        // font-size: 14px;
+        // font-weight: 500;
+    }
+    .docTitle {
+        font-size: 15px;
+        margin-left: 10px;
+    }
+    #docfile {
+        position: absolute;
+        opacity: 0;
+        display: none !important;
+    }
+    .item-md .item-button[icon-only] ion-icon,
+    .item-md .item-button[icon-only] {
+        border-radius: 50% !important;
+        width: 30px;
+        height: 30px;
+    }
+    .redStar {
+        color: rgb(236, 29, 29);
+    }
+    .removebtn {
+        font-size: 1rem;
+        width: 30px;
+        height: 30px;
+        opacity: 0.7;
+    }
+    ion-select {
+        max-width: 100% !important;
+        // float: right;
+        // text-align: right;
+    }
+    .select-text {
+        float: right;
+        text-align: right;
+    }
+    .select-text[dir="rtl"] {
+        float: left;
+        text-align: left;
+    }
+    .item-input .label-md,
+    .item-select .label-md,
+    .item-datetime .label-md {
+        color: #000 !important;
+    }
+    .list-md .item-input:last-child {
+        border-bottom: 0px solid #dedede !important;
+    }
+    .datetime-md .datetime-placeholder {
+        margin-left: -10px !important;
+        opacity: 0.7 !important;
+        font-weight: 400 !important;
+    }
+    .textalign {
+        text-align: right;
+    }
+    ion-label {
+        white-space: unset !important;
+    }
+    .width {
+        width: 100px;
+        border-radius: 5px;
+    }
+    .textLeft {
+        text-align: left;
+    }
+    .textRight {
+        text-align: right;
+    }
+    .item-md .item-button[icon-only] ion-icon,
+    .item-md .item-button[icon-only] {
+        padding: 4px 0px;
+    }
+    .title {
+        font-size: 13px !important;
+        text-overflow: inherit;
+        white-space: normal;
+    }
+    .text {
+        font-size: 13px !important;
+    }
+}

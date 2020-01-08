@@ -1,0 +1,62 @@
+    page-settings {
+        .pintop {
+            margin-top: 13px;
+        }
+        // .button[icon-only] {
+        //     border-radius: 50%;
+        //     width: 36px;
+        //     height: 36px;
+        //     margin-top: -7px;
+        // }
+        ion-title {
+            margin-top: 4px;
+        }
+        .button-small-md {
+            border-radius: 5px;
+        }
+        img {
+            border: 1px solid #ddd;
+        }
+        .bar-button-md:first-child {
+            margin-top: -3px !important;
+        }
+        .button-ios {
+            margin: -1.0rem 0.2rem !important;
+        }
+        .topbtn {
+            border-radius: 70% !important;
+            padding: 13px !important;
+            box-shadow: 3px 3px 7px 1px #ccc;
+            width: 36px;
+            height: 36px;
+            margin-top: -3px;
+        }
+        .segment-md .segment-button.segment-activated {
+            border-color: #7cb342 !important;
+        }
+        .segment-md .segment-button {
+            color: #246275;
+        }
+        .segment-ios .segment-button.segment-activated {
+            background-color: #246275 !important;
+        }
+        .segment-ios .segment-button {
+            border-color: #246275;
+            color: #246275;
+            background-color: transparent;
+        }
+        .rowtop {
+            margin-top: 7px;
+        }
+        ion-select {
+            max-width: 70% !important;
+        }
+        .title {
+            font-size: 13px !important;
+            text-overflow: inherit;
+            white-space: normal;
+        }
+        .text {
+            font-size: 13px !important;
+        }
+    }

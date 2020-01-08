@@ -1,0 +1,39 @@
+page-search-word-view {
+    .topbtn {
+        border-radius: 70% !important;
+        padding: 13px !important;
+        box-shadow: 3px 3px 7px 1px #ccc;
+        width: 37px;
+        height: 37px;
+    }
+    ion-title {
+        margin-top: 10px;
+    }
+    .pageNumber {
+        font-size: 20px;
+        color: #246275;
+    }
+    .color:hover {
+        color: #fff;
+    }
+    button {
+        background-color: Transparent;
+        background-repeat: no-repeat;
+        border: none;
+        cursor: pointer;
+        overflow: hidden;
+        outline: none;
+    }
+    .padding0 {
+        padding: 0;
+    }
+    .styleicons:hover {
+        background: #7cb342;
+        padding: 3px;
+        border-radius: 50%;
+        margin-top: -5px;
+    }
+    button.swiper-pagination-bullet {
+        opacity: 0 !important;
+    }
+}

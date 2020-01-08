@@ -1,0 +1,29 @@
+page-show-attachment {
+    @include settingAnimationHeader;
+    .fade-in-left-item {
+        -webkit-animation: fadeInLeft 800ms;
+        -moz-animation: fadeInLeft 800ms;
+        -o-animation: fadeInLeft 800ms;
+        animation: fadeInLeft 800ms;
+    }
+    .topbtn {
+        border-radius: 70% !important;
+        padding: 13px !important;
+        box-shadow: 3px 3px 7px 1px #ccc;
+        width: 41px;
+        height: 41px;
+    }
+    .whiteSpace {
+        white-space: initial;
+    }
+    .active {
+        font-size: 20px;
+        color: #7cb342;
+        -webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0px 0px rgba(0, 0, 0, 0.2);
+    }
+    .inactive {
+        font-size: 20px;
+        opacity: 0.7;
+    }
+}

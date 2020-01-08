@@ -1,0 +1,150 @@
+page-search {
+    @include settingAnimationHeader;
+    .fade-in-left-item {
+        -webkit-animation: fadeInLeft 800ms;
+        -moz-animation: fadeInLeft 800ms;
+        -o-animation: fadeInLeft 800ms;
+        animation: fadeInLeft 800ms;
+    }
+    ion-title {
+        margin-top: 5px !important;
+    }
+    .item-md[no-lines] {
+        border-width: 0;
+        margin-top: -5px;
+    }
+    .labelColor {
+        color: #246275;
+        text-align: right;
+        font-size: 15px;
+        padding-top: 7px;
+    }
+    .searchbar-md {
+        padding: 0;
+        padding-left: 5px;
+    }
+    .searchBtns {
+        border-radius: 50%;
+        width: 39px;
+        height: 39px;
+        margin-top: 0;
+    }
+    .adSearch {
+        white-space: inherit;
+        margin-top: 9px;
+    }
+    .segment-md .segment-button.segment-activated {
+        border-color: #7cb342 !important;
+    }
+    .segment-md .segment-button {
+        color: #246275;
+    }
+    .rowtop {
+        margin-top: 7px !important;
+    }
+    .segment-ios .segment-button.segment-activated {
+        background-color: #246275 !important;
+    }
+    .segment-ios .segment-button {
+        border-color: #246275;
+        color: #246275;
+        background-color: transparent;
+    }
+    .toggletop {
+        margin-top: -5px;
+    }
+    .toolbar-title-md {
+        padding: 0 !important;
+    }
+    .active {
+        font-size: 13px;
+        color: #7cb342;
+        -webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0px 0px rgba(0, 0, 0, 0.2);
+    }
+    .inactive {
+        font-size: 13px;
+        opacity: 0.7;
+    }
+    .complete {
+        font-size: 13px;
+        columns: #246275;
+        -webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0px 0px rgba(0, 0, 0, 0.2);
+    }
+    .whiteSpace {
+        white-space: initial;
+    }
+    ion-footer {
+        background: #fff;
+    }
+    .cardContent {
+        background: #d6f1bb;
+        box-shadow: 3px 0px 7px 0px #a3a7a0;
+        margin-bottom: 10px;
+    }
+    .cardMeta {
+        background: #f1cbcb;
+        box-shadow: 3px 0px 7px 0px #a3a7a0;
+    }
+    .card-content-md {
+        padding: 3px;
+    }
+    .item-md.item-block .item-inner {
+        padding-right: 0 !important;
+        border-bottom: 1px solid #dedede;
+    }
+    .background {
+        background: #246275;
+        color: #fff;
+        border-radius: 3px;
+        margin: 4px !important;
+    }
+    .background:hover {
+        background: #7cb342;
+    }
+    .dropdownicon {
+        margin-top: 3px;
+        font-size: 25px;
+    }
+    .searchdist {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .border {
+        border: 1px solid #ccc;
+    }
+    ion-select {
+        max-width: 70% !important;
+    }
+    .width {
+        width: 100px;
+        margin: 0;
+        border-radius: 5px;
+    }
+    .dist {
+        margin-top: 7px;
+    }
+    .datetime-md .datetime-placeholder {
+        margin-left: -10px !important;
+        opacity: 0.7 !important;
+        font-weight: 400 !important;
+    }
+    .label-md {
+        margin: 0 !important;
+    }
+    .title {
+        font-size: 13px !important;
+        text-overflow: inherit;
+        white-space: normal;
+    }
+    .text {
+        font-size: 13px !important;
+    }
+    .card-md {
+        font-size: 13px !important;
+    }
+    .card-content-md {
+        font-size: 13px !important;
+    }
+}

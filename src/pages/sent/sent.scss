@@ -1,0 +1,52 @@
+page-sent {
+    .fade-in-left-item {
+        -webkit-animation: fadeInLeft 800ms;
+        -moz-animation: fadeInLeft 800ms;
+        -o-animation: fadeInLeft 800ms;
+        animation: fadeInLeft 800ms;
+    }
+    .col {
+        padding: 0 !important;
+    }
+    .item[no-lines],
+    .item.item[no-lines] .item-inner {
+        border: 0;
+        padding: 0 !important;
+        margin: 0;
+    }
+    .iconActionsColor {
+        color: #246275;
+        font-size: 30px;
+        text-align: left;
+        cursor: pointer;
+    }
+    [padding] h1:first-child,
+    [padding] h2:first-child,
+    [padding] h3:first-child,
+    [padding] h4:first-child,
+    [padding] h5:first-child,
+    [padding] h6:first-child {
+        margin-top: 0 !important;
+    }
+    h6 {
+        margin-top: 0.5% !important;
+    }
+    .swiper-pagination-bullet-active {
+        background: #246275 !important;
+    }
+    .subject {
+        font-size: 13px !important;
+        text-overflow: inherit;
+        white-space: normal;
+    }
+    .typeName {
+        text-overflow: inherit;
+        white-space: normal;
+        font-size: 13px !important;
+    }
+    .title {
+        font-size: 13px !important;
+        text-overflow: inherit;
+        white-space: normal;
+    }
+}

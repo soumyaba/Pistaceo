@@ -1,0 +1,35 @@
+page-properties {
+    .tabbar {
+        opacity: 1 !important;
+    }
+    .tabs-md .tab-button {
+        min-height: 4.3rem;
+        font-weight: 100;
+    }
+    .tabs-md .tab-button[aria-selected=true] {
+        color: white;
+        padding: 0;
+        background: #7CB342;
+        font-weight: bold;
+    }
+    .tabs-ios .tab-button:hover:not(.disable-hover),
+    .tabs-ios .tab-button[aria-selected=true] {
+        color: white;
+        padding: 0;
+        background: #7CB342;
+        font-weight: bold;
+    }
+    .props .button[icon-only] {
+        border-radius: 50%;
+        width: 39px;
+    }
+    .textRight {
+        text-align: right;
+    }
+    .prop {
+        margin-top: 10px;
+    }
+    .greenIcon {
+        color: #246275;
+    }
+}

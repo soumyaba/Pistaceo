@@ -1,0 +1,388 @@
+<!--
+  Generated template for the ActivityPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+        <ion-row no-margin>
+            <ion-col col-5 no-padding>
+                <ion-title>{{'Activity' | translate}}</ion-title>
+            </ion-col>
+            <ion-col col-7 no-padding *ngIf="btnshow === true && this.readWrite === 'readWrite' && displayImage" text-right>
+                <button ion-button (click)="enable()" small><ion-icon name="image"></ion-icon>{{'Annotate' | translate }}</button>
+            </ion-col>
+            <ion-col col-7 no-padding *ngIf="annoatateBtns">
+                <ion-row no-margin>
+                    <ion-col col-6 no-padding text-right>
+                        <button ion-button (click)="saveImageAnnoataions()" small><ion-icon name="image"></ion-icon>{{'Save' | translate}}</button>
+                    </ion-col>
+                    <ion-col col-6 no-padding text-right>
+                        <button ion-button (click)="clear()" small><ion-icon name="close"></ion-icon>{{'Clear' | translate}}</button>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-segment [(ngModel)]="showSegments">
+        <ion-segment-button value="showActivity" *ngIf="showactivity === true && activitiInfo && getWorkType && slideIndex === 0" (click)="segmentChanged($event)">
+            <span> {{getWorkType.name | translate}}</span>
+        </ion-segment-button>
+        <ion-segment-button value="showForm" *ngIf="showform === true">
+            {{createformtitle | translate }}
+        </ion-segment-button>
+    </ion-segment>
+    <div [ngSwitch]="showSegments">
+        <div *ngSwitchCase="'showActivity'">
+            <div *ngIf="activitiInfo && getWorkType">
+                <ion-slides pager (ionSlideDidChange)="slideChanged()" [ngClass]="animateClass" #Slides [zoom]=showZoom dir="ltr">
+                    <!-- effect="flip" -->
+                    <ion-slide class="swiper-zoom-container" [dir]="menuser.rtlSupport">
+                        <!-- <h5 class="iconColor">{{getWorkType.name}}</h5> -->
+                        <form [formGroup]="activityForm" (ngSubmit)="activityFormSubmit(getWorkType.nextScreen)">
+                            <ion-grid no-padding>
+                                <ion-item no-lines [ngClass]="animateClass" text-wrap>
+                                    <ion-label class="labelWidth">{{'Work Type' | translate }}:</ion-label>
+                                    <ion-input type="text" formControlName="worktype" readonly text-wrap></ion-input>
+                                </ion-item>
+                                <ion-item no-lines [ngClass]="animateClass" text-wrap>
+                                    <ion-label class="labelWidth">{{'Activity Type' | translate }}:</ion-label>
+                                    <ion-input type="text" formControlName="activitytype" readonly text-wrap></ion-input>
+                                </ion-item>
+                                <ion-item no-lines [ngClass]="animateClass" text-wrap>
+                                    <ion-label class="labelWidth">{{'Ref No' | translate }}:</ion-label>
+                                    <ion-input type="text" formControlName="refNo" readonly text-wrap></ion-input>
+                                </ion-item>
+                                <ion-item no-lines [ngClass]="animateClass" text-wrap>
+                                    <ion-label class="labelWidth">{{'Created On' | translate }}:</ion-label>
+                                    <ion-input type="text" formControlName="createdOn" readonly text-wrap></ion-input>
+                                </ion-item>
+                                <ion-item no-lines [ngClass]="animateClass" text-wrap *ngIf="getWorkType.instructions !== undefined">
+                                    <ion-label class="labelWidth"> {{'Instructions' | translate }}:</ion-label>
+                                    <ion-textarea type="text" formControlName="instructions" readonly rows="1" style="color:#246275"></ion-textarea>
+                                </ion-item>
+                                <ion-item no-lines [ngClass]="animateClass" text-wrap>
+                                    <ion-label class="labelWidth"> {{'Subject' | translate }}:</ion-label>
+                                    <ion-textarea type="text" formControlName="subject" readonly></ion-textarea>
+                                </ion-item>
+                                <div *ngIf="showToDo">
+                                    <div *ngFor="let item of getWorkType.docTypes">
+                                        <ion-item [ngClass]="animateClass" *ngIf="item.type === 'DOCUMENT'">
+                                            <span class="attchfiles">{{item.name}}:</span>
+                                            <input type="file" accept="application/msword,application/pdf,image/*" (change)="imageFilePath_change($event)" id="fileInput" multiple="true" />
+                                            <label style="float: right;" for="fileInput" icon-only ion-button text-center>
+                                                                    <ion-icon name="attach"></ion-icon>
+                                                            </label>
+                                        </ion-item>
+                                        <div *ngIf="showDocOrForms && item.type === 'DOCUMENT'">
+                                            <div *ngFor="let files of tempAttachments">
+                                                <ion-row [ngClass]="animateClass">
+                                                    <ion-col col-10 text-left>
+                                                        <span class="docTitle"> {{files.docTitle}}</span>
+                                                    </ion-col>
+                                                    <ion-col col-2 text-right>
+                                                        <span class="removeIcon">
+                                                                        <ion-icon name="close" (click)="removeFile(files)" ></ion-icon>
+                                                                    </span>
+                                                    </ion-col>
+                                                </ion-row>
+                                            </div>
+                                        </div>
+                                        <ion-item [ngClass]="animateClass" *ngIf="item.type === 'FORM' && readWrite !== 'readOnly'">
+                                            <ion-label class="labelWidth">{{'Form' | translate}}<sup class="redStar" *ngIf="item.req === 1">*</sup>:</ion-label>
+                                            <ion-label class="formStyle">
+                                                <ion-row>
+                                                    <ion-col col-9 text-left text-wrap>
+                                                        <u (click)="openForms(item)">{{item.name}}</u>
+                                                    </ion-col>
+                                                    <ion-col *ngIf="showDocumentsTick">
+                                                        <span><ion-icon name="checkmark-circle" class="greenTicked" ></ion-icon></span>
+                                                    </ion-col>
+                                                </ion-row>
+                                            </ion-label>
+                                        </ion-item>
+                                    </div>
+                                </div>
+                                <ion-item no-lines [ngClass]="animateClass" *ngIf="readWrite !== 'readOnly'">
+                                    <ion-label class="labelWidth">{{'Response' | translate}}<sup class="redStar">*</sup>:</ion-label>
+                                    <ion-select multiple="false" formControlName="responseDropdown" interface="popover" (ionChange)="responseSelectChange($event)" [disabled]="disableResponse">
+                                        <ion-option [value]="value.name" *ngFor="let value of getWorkType.responses">{{value.name}}</ion-option>
+                                    </ion-select>
+                                </ion-item>
+                                <ion-item no-lines [ngClass]="animateClass" text-wrap *ngIf="readWrite === 'readOnly'">
+                                    <ion-label class="labelWidth">{{'Assigned To' | translate }}:</ion-label>
+                                    <ion-textarea type="text" readonly [value]="showRoleMembers"></ion-textarea>
+                                </ion-item>
+                                <ion-item no-lines [ngClass]="animateClass" text-wrap *ngIf="( readWrite !== 'readOnly' || ( readWrite === 'readOnly' && activitiInfo.comments !== undefined)) ">
+                                    <ion-label class="labelWidth">{{'Comments' | translate }}<sup class="redStar">*</sup>:</ion-label>
+                                    <ion-textarea [class]="readWrite !== 'readOnly' ? 'textarea-Border' : ''" formControlName="comments"></ion-textarea>
+                                </ion-item>
+                                <!-- {{richtextShow}} -->
+                                <!-- <span class="labelWidth comments" *ngIf="richtextShow">Comments<sup class="redStar">*</sup>:</span>
+                                            <ion-item no-lines [ngClass]="animateClass" *ngIf="richtextShow">
+                                                <div [froalaEditor] formControlName="comments">Insert Text</div>
+                                            </ion-item> -->
+                                <!-- [formControl]="editorContent" -->
+                                <!-- <ion-item no-lines [ngClass]="animateClass" text-right *ngIf="readWrite === 'readOnly'">
+                                                <span>[{{showRoleMembers}}]</span>
+                                            </ion-item> -->
+
+                                <!-- {{hideRoute}} , {{readWrite}}, {{disbaleSelectSearch}} -->
+                                <div *ngIf="!hideRoute && readWrite !== 'readOnly' && getWorkType.responses.length > 0">
+                                    <br>
+                                    <h6 [ngClass]=" animateClass ">{{'Route To' | translate }}</h6>
+                                    <ion-item no-lines [ngClass]="animateClass " text-wrap>
+                                        <ion-label class="labelWidth ">{{'Role' | translate }}<sup class="redStar ">*</sup>:</ion-label>
+                                        <!-- <select-searchable *ngIf="disbaleSelectSearch=== false" #myselect item-content [(ngModel)]="routeToItem" formControlName="roleDropdown" [items]="routeTodata " itemValueField="id " itemTextField="name" [canSearch]="true " (onChange)="roleChanged($event) "
+                                                        [isMultiple]="multiRoleSelect " (onSearch)="onSearchRoles($event) " isSearching="true" searchPlaceholder="Enter 3 or more characters" title="Search" canReset="true">
+                                                    </select-searchable> -->
+                                        <select-searchable *ngIf="disbaleSelectSearch === false " #myselect item-content [(ngModel)]="routeToItem" formControlName="roleDropdown" [items]="routeTodata" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="roleChanged($event)"
+                                            [isMultiple]="multiRoleSelect" (onSearch)="onSearchRoles($event)" isSearching="true" searchPlaceholder="{{'Enter 3 or more characters' | translate }}" title="Search" canReset="true">
+                                        </select-searchable>
+                                        <ion-input *ngIf="disbaleSelectSearch" formControlName="roleDropdown" [(ngModel)]="routeToItem[0].name" readonly></ion-input>
+                                    </ion-item>
+                                </div>
+                                <br>
+                                <ion-row [ngClass]="animateClass " *ngIf="readWrite !== 'readOnly'">
+                                    <!-- <ion-col col-5></ion-col> -->
+                                    <ion-col align-self-center bottom-form col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6 class="textAlign">
+                                        <button type="submit" small ion-button class="btnHt">{{'Complete' | translate }}</button>
+                                    </ion-col>
+
+                                </ion-row>
+                                <ion-row [ngClass]="animateClass " *ngIf="readWrite === 'readOnly' && getWorkType.canRecall === 1">
+                                    <!-- <ion-col col-5></ion-col> -->
+                                    <ion-col align-self-center bottom-form col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6 class="textAlign">
+
+                                        <button type="button" ion-button (click)="recallActivity()" class="btnHt">{{'Recall' | translate }}</button>
+                                    </ion-col>
+
+                                </ion-row>
+                                <ion-row [ngClass]="animateClass " *ngIf="readWrite === 'readOnly' && notify === true">
+                                    <!-- <ion-col col-5></ion-col> -->
+                                    <ion-col align-self-center bottom-form col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6 class="textAlign">
+
+                                        <button type="button" ion-button (click)="notification()" class="btnHt">{{'Send Notification' | translate }}</button>
+                                    </ion-col>
+
+                                </ion-row>
+                                <br>
+                            </ion-grid>
+                        </form>
+                    </ion-slide>
+                    <ion-slide [ngClass]="showZoom === 'false' ? '' : 'swiper-zoom-container'">
+                        <div *ngIf="displayImage">
+                            <ion-row no-margin *ngIf="dataImage.pageCount> 1">
+                                <ion-col col-3></ion-col>
+                                <ion-col col-1 no-padding>
+                                    <button class="padding0 styleicons" (click)="firstPage(1)" [disabled]="currentPage === 1"><ion-icon name="rewind" class="pageNumber color" ></ion-icon></button>
+                                </ion-col>
+                                <ion-col col-1 no-padding>
+                                    <button class="padding0 styleicons" (click)="previousPage(currentPage-1)" [disabled]="currentPage === 1"><ion-icon name="skip-backward" class="pageNumber color"></ion-icon></button>
+                                </ion-col>
+                                <ion-col col-2 no-padding class="pageNumber">
+                                    {{currentPage}}/{{dataImage.pageCount}}
+                                </ion-col>
+                                <ion-col col-1 no-padding>
+                                    <button class="padding0 styleicons" (click)="nextPage(currentPage+1)" [disabled]="currentPage === dataImage.pageCount"><ion-icon name="skip-forward" class="pageNumber color"></ion-icon></button>
+                                </ion-col>
+                                <ion-col col-1 no-padding>
+                                    <button class="padding0 styleicons" (click)="lastPage(dataImage.pageCount)" [disabled]="currentPage === dataImage.pageCount"><ion-icon name="fastforward" class="pageNumber color"></ion-icon></button>
+                                </ion-col>
+                                <ion-col col-3></ion-col>
+                            </ion-row>
+                            <ion-row no-margin>
+                                <ion-col col-6 text-left no-padding>
+                                    <ion-title>{{'Document Preview' | translate }}</ion-title>
+                                </ion-col>
+                                <ion-col col-2 *ngIf="getWorkType.updatePrimary !== 2" no-padding>
+                                    <button ion-button round class="topbtnActive" no-padding (click)="downLoadSigned(activitiInfo.primaryDoc)">
+                                                    <ion-icon name="download"></ion-icon>
+                                                </button>
+                                </ion-col>
+                                <ion-col col-2 *ngIf="getWorkType.updatePrimary === 2" no-padding>
+                                    <button ion-button round class="topbtnActive" no-padding (click)="downloadDocumentsSendName(activitiInfo.primaryDoc, 'DownloadDocument')">
+                                                    <ion-icon name="download"></ion-icon>
+                                                </button>
+                                </ion-col>
+                                <ion-col col-2 *ngIf="activitiInfo.flag === 1" no-padding>
+                                    <button ion-button round class="topbtnActive showimpbtns" no-padding (click)="removeflagActivitiy()">
+                                                    <ion-icon name="flag"></ion-icon>
+                                                </button>
+                                </ion-col>
+                                <ion-col col-2 *ngIf="activitiInfo.flag === 0" no-padding>
+                                    <button ion-button round class="topbtnActive hideimpbtns" no-padding (click)="flagActivitiy()">
+                                                        <ion-icon name="flag"></ion-icon>
+                                                    </button>
+                                </ion-col>
+                                <ion-col col-2 no-padding>
+                                    <span text-right [class]="annotaionCount > 9 ? 'countamt count10' : annotaionCount > 99 ? 'countamt count100' : 'countamt count0'" (click)="showAnnotations()">
+                                                            {{annotaionCount}}
+                                                    </span>
+                                    <button ion-button round class="topbtnActive" (click)="showAnnotations()">
+                                                        <ion-icon name="list"></ion-icon>
+                                                    </button>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row [ngClass]="animateClass ">
+                                <div class="profile-picture big-profile-picture ">
+                                    <ion-item no-lines *ngIf="imageannotationURL.length > 0" width="canvasWidth" no-padding>
+                                        <signature-pad class="border" #signature [backgroundImages]="imageannotationURL" [disabled]="signatureDisabled" (onEndEvent)="drawComplete($event)" [canvasWidth]="canvasWidth" [canvasHeight]="canvasheight"></signature-pad>
+                                    </ion-item>
+                                </div>
+                            </ion-row>
+                            <ion-row no-margin *ngIf="dataImage.pageCount> 1">
+                                <ion-col col-3></ion-col>
+                                <ion-col col-1 no-padding>
+                                    <button class="padding0 styleicons" (click)="firstPage(1)" [disabled]="currentPage === 1"><ion-icon name="rewind" class="pageNumber color" ></ion-icon></button>
+                                </ion-col>
+                                <ion-col col-1 no-padding>
+                                    <button class="padding0 styleicons" (click)="previousPage(currentPage-1)" [disabled]="currentPage === 1"><ion-icon name="skip-backward" class="pageNumber color"></ion-icon></button>
+                                </ion-col>
+                                <ion-col col-2 no-padding class="pageNumber">
+                                    {{currentPage}}/{{dataImage.pageCount}}
+                                </ion-col>
+                                <ion-col col-1 no-padding>
+                                    <button class="padding0 styleicons" (click)="nextPage(currentPage+1)" [disabled]="currentPage === dataImage.pageCount"><ion-icon name="skip-forward" class="pageNumber color"></ion-icon></button>
+                                </ion-col>
+                                <ion-col col-1 no-padding>
+                                    <button class="padding0 styleicons" (click)="lastPage(dataImage.pageCount)" [disabled]="currentPage === dataImage.pageCount"><ion-icon name="fastforward" class="pageNumber color"></ion-icon></button>
+                                </ion-col>
+                                <ion-col col-3></ion-col>
+                            </ion-row>
+                            <br>
+                        </div>
+                        <div *ngIf="!displayImage">
+                            <ion-row text-center [ngClass]="animateClass" text-center>
+                                <ion-col col-12 text-center>
+                                    <h5 class="textslide">{{'No Document To Preview' | translate }}</h5>
+                                </ion-col>
+                            </ion-row>
+
+
+                        </div>
+                    </ion-slide>
+
+                    <ion-slide class="swiper-zoom-container " [dir]="menuser.rtlSupport">
+                        <div *ngIf="historyList.length > 0" class="textslide">
+                            <ion-row text-center>
+                                <ion-title>{{'History' | translate }}</ion-title>
+                            </ion-row>
+                            <br>
+
+                            <!-- <ion-grid no-padding *ngIf="historyList">
+                                <ion-row no-padding>
+                                    <ion-col col-12 no-padding>
+                                        <ion-item border no-lines class="textleft" no-padding [ngClass]="animateClass" *ngFor="let version of historyList; let i = index">
+                                            <ion-row no-margin>
+                                                <ion-col col-5 no-padding class="whiteSpace textleft">
+                                                    <ion-label>{{version.userName}}</ion-label>
+                                                    <ion-label> {{version.actionOn}}</ion-label>
+                                                </ion-col>
+                                                <ion-col col-1 no-padding class="whiteSpace textleft">
+                                                    <ion-label>{{version.action}}</ion-label>
+                                                    <ion-label> {{version.pendingWith}}</ion-label>
+                                                </ion-col>
+
+
+                                            </ion-row>
+
+                                        </ion-item>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid> -->
+                            <ion-grid no-padding *ngIf="historyList !== undefined">
+                                <ion-row>
+                                    <ion-col col-12 no-padding>
+                                        <ion-list no-margin>
+                                            <ion-item-sliding [ngClass]="animateClass" *ngFor="let item of historyList; let i = index;" #slidingItem no-padding>
+                                                <ion-item border no-lines [ngClass]="item.status !=='NEW'? 'backread': 'background' ">
+                                                    <ion-row no-margin>
+                                                        <ion-col col-5 no-padding>
+                                                            <h6 item-title><span class="histroyItems">{{item.userName}}</span> </h6>
+                                                            <h6 item-title class="histroyItems">{{item.actionOn}}</h6>
+                                                        </ion-col>
+                                                        <ion-col col-1></ion-col>
+                                                        <ion-col col-6 no-padding>
+                                                            <h6 class="histroyItems" item-title>{{item.action}}</h6>
+                                                            <h6 class="histroyItems" item-title>{{item.pendingWith}}</h6>
+                                                        </ion-col>
+                                                    </ion-row>
+                                                    <ion-row no-margin *ngIf="item.details">
+                                                        <ion-col col-12 no-padding class="histroyItems">
+                                                            <h6 class="histroyItems" item-title>{{item.details}}</h6>
+                                                        </ion-col>
+                                                    </ion-row>
+                                                </ion-item>
+
+                                            </ion-item-sliding>
+
+                                        </ion-list>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                        <div *ngIf="historyList.length === 0" class="textslide">
+                            <ion-row text-center>
+                                <ion-title>{{'No any history details' | translate }}</ion-title>
+                            </ion-row>
+                        </div>
+                    </ion-slide>
+                    <ion-slide [dir]="menuser.rtlSupport">
+                        <div *ngIf="showAttAchments.length > 0" class="textslide">
+                            <ion-row text-center>
+                                <ion-title>{{'Documents' | translate }}</ion-title>
+                            </ion-row>
+                            <ion-grid no-padding>
+                                <ion-row no-padding>
+                                    <ion-col col-12 no-padding>
+                                        <ion-list no-margin>
+                                            <ion-item-sliding border no-lines class="textleft" no-padding [ngClass]="animateClass" *ngFor="let version of showAttAchments; let i = index">
+                                                <ion-item no-lines class="textleft" no-padding>
+                                                    <ion-row no-margin>
+                                                        <ion-col col-2 no-padding class="whiteSpace textleft">
+                                                            <img src='assets/images/forms.png' *ngIf="version.docType.type==='FORM' " alt="folder " style="width:25px; height: 25px "> &nbsp;
+                                                            <img src='assets/images/Docs-icon.png' *ngIf="version.docType.type==='DOCUMENT' " alt="folder " style="width:25px; height: 25px; float: left; "> &nbsp;
+                                                        </ion-col>
+                                                        <ion-col col-8 no-padding class="whiteSpace textleft">
+                                                            <h6 class="histroyItems" item-title><b>{{version.docTitle}}</b></h6>
+                                                            <h6 class="histroyItems" item-title>{{version.docType.name}}</h6>
+                                                        </ion-col>
+
+                                                        <ion-col col-2 no-padding class="text-center">
+                                                            <ion-icon name="download" (click)="downloadDocuments(version)" class="download"></ion-icon>
+                                                        </ion-col>
+                                                    </ion-row>
+                                                </ion-item>
+                                                <!-- <ion-item-options side="right" dir="ltr">
+                                                                <button ion-button type="button">
+                                                                    <ion-icon name="download"></ion-icon>
+                                                                </button>
+                                                            </ion-item-options> -->
+                                            </ion-item-sliding>
+                                        </ion-list>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                        <div *ngIf="historyList.length === 0" class="textslide">
+                            <ion-row text-center>
+                                <ion-title>{{'No any history details' | translate }}</ion-title>
+                            </ion-row>
+                        </div>
+                    </ion-slide>
+                </ion-slides>
+            </div>
+        </div>
+        <div *ngSwitchCase="'showForm'">
+            <dynamic-form [dynamicFormJSON]="formObject" [activityType]="'SAVED'" [createformtitle]="createformtitle" (formJSONOutput)="formDynamicSubmit($event)" (formCancel)="cancelForm($event)"></dynamic-form>
+        </div>
+    </div>
+
+</ion-content>

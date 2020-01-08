@@ -1,0 +1,41 @@
+<!---Settings Main Header dir="rtl"-->
+<ion-split-pane when="lg,xl" [dir]="menuService.rtlSupport">
+    <!-- Menu Main Top dir="rtl" [side]="menuService.rtlSupport === 'ltr' ? 'left' : 'right'"-->
+    <ion-menu [content]="content" type="overlay" *ngIf="params != null" id="myMenu" [root]="rootPage" [dir]="menuService.rtlSupport">
+        <ion-header>
+            <div header-background-image padding [ngStyle]="{'background-image': 'url(' + params.background + ')'}">
+                <img [src]="params.image">
+                <h2 ion-text header-title>{{'Welcome To Pistaceo' | translate }} </h2>
+                <!-- <p *ngIf="this.userName">{{userName}}</p> -->
+            </div>
+        </ion-header>
+        <!-- Menu Main List -->
+        <ion-content>
+            <ion-list no-margin>
+                <ion-item *ngFor="let p of pages" class="labelCss" no-lines style="border-bottom: 1px solid #ccc">
+                    <button menuClose ion-item item-title main-menu no-lines style="padding-left:0" (click)="openPage(p)" *ngIf="p.title !== 'Create'">
+        <ion-icon icon-small item-left>
+          <i class="icon {{p.icon}}"></i>
+        </ion-icon>
+        {{p.title | translate }}  <span *ngIf="p.title === 'Inbox'">&nbsp;&nbsp;&nbsp;<span class="countCss">{{inboxValueCount}}</span></span><span *ngIf="p.title === 'Drafts'" >&nbsp;&nbsp;<span class="countCss">{{draftsValueCount}}</span> </span>
+
+    </button>
+                    <ion-icon icon-small item-left *ngIf="p.title === 'Create'" [class]="menuService.rtlSupport === 'ltr' ? 'leftPad' : 'rightPad'">
+                        <i class="icon-pencil"></i>
+                    </ion-icon>
+                    <!--  -->
+                    <ion-label *ngIf="p.title === 'Create'" class="selectDrop item-title ion-item  main-menu">{{p.title | translate}}</ion-label>
+                    <ion-select class="drop" [(ngModel)]="createOptionsSelected" style="width:75%" *ngIf="p.title === 'Create'" interface="popover" class="ionSelect  ion-item item-title main-menu" (ionChange)="createOptionChanged($event, p);">
+                        <ion-option *ngFor="let create of createOptions" [value]="create.id">{{create.name}}</ion-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+
+        </ion-content>
+    </ion-menu>
+    <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus dir="rtl"-->
+    <ion-nav [root]="rootPage" #content main swipeBackEnabled="false"></ion-nav>
+</ion-split-pane>
+<ion-footer *ngIf="!footerIsHidden" class="footer" no-border text-right>
+    <span style="font-size: 13px;">{{'Copyright' | translate }} &copy;{{'HashECM 2018-20' | translate }} &nbsp;&nbsp;&nbsp;</span>
+</ion-footer>

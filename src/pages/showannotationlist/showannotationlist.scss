@@ -1,0 +1,33 @@
+page-showannotationlist {
+    @include settingAnimationHeader;
+    .fade-in-left-item {
+        -webkit-animation: fadeInLeft 800ms;
+        -moz-animation: fadeInLeft 800ms;
+        -o-animation: fadeInLeft 800ms;
+        animation: fadeInLeft 800ms;
+    }
+    .topbtn {
+        border-radius: 70% !important;
+        padding: 13px !important;
+        box-shadow: 2px 1px 3px 1px #ccc;
+        width: 41px;
+        height: 41px;
+    }
+    .whiteSpace {
+        white-space: initial;
+    }
+    .item-md.item-block .item-inner {
+        padding-right: 0 !important;
+    }
+    .title {
+        font-size: 13px !important;
+        text-overflow: inherit;
+        white-space: normal;
+    }
+    .topGap {
+        margin-top: 10px;
+    }
+    .textCenter {
+        text-align: center !important;
+    }
+}

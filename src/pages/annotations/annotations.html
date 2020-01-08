@@ -1,0 +1,96 @@
+<!--
+  Generated template for the AnnotationsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-row no-margin>
+            <ion-col col-12 no-padding>
+                <ion-title>{{'Annoatations' | translate }}</ion-title>
+            </ion-col>
+            <!-- <ion-col col-3 no-padding class="textRight props" text-right>
+                <button ion-button icon-only (click)="showoOptions()">
+                            <ion-icon name="more"></ion-icon>
+                        </button>
+            </ion-col> -->
+        </ion-row>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <!-- <ion-title text-center>{{'Preview Document' | translate }}</ion-title> -->
+    <div *ngIf="displayImage">
+        <ion-row no-margin *ngIf="dataImage.pageCount> 1">
+            <ion-col col-3></ion-col>
+            <ion-col col-1 no-padding>
+                <button class="padding0 styleicons" (click)="firstPage(1)" [disabled]="currentPage === 1"><ion-icon name="rewind" class="pageNumber color" ></ion-icon></button>
+            </ion-col>
+            <ion-col col-1 no-padding>
+                <button class="padding0 styleicons" (click)="previousPage(currentPage-1)" [disabled]="currentPage === 1"><ion-icon name="skip-backward" class="pageNumber color"></ion-icon></button>
+            </ion-col>
+            <ion-col col-2 no-padding class="pageNumber">
+                {{currentPage}}/{{dataImage.pageCount}}
+            </ion-col>
+            <ion-col col-1 no-padding>
+                <button class="padding0 styleicons" (click)="nextPage(currentPage+1)" [disabled]="currentPage === dataImage.pageCount"><ion-icon name="skip-forward" class="pageNumber color"></ion-icon></button>
+            </ion-col>
+            <ion-col col-1 no-padding>
+                <button class="padding0 styleicons" (click)="lastPage(dataImage.pageCount)" [disabled]="currentPage === dataImage.pageCount"><ion-icon name="fastforward" class="pageNumber color"></ion-icon></button>
+            </ion-col>
+            <ion-col col-3></ion-col>
+        </ion-row>
+    </div>
+    <ion-slides pager #Slides [zoom]=showZoom>
+        <br>
+        <ion-slide [ngClass]="showZoom === 'false' ? '' : 'swiper-zoom-container'">
+            <br>
+            <div *ngIf="displayImage">
+                <ion-row [ngClass]="animateClass" class="gap">
+                    <div class="profile-picture big-profile-picture ">
+                        <h4 class="titleColor">{{'Document Preview' | translate }}</h4>
+                        <ion-item no-lines *ngIf="imageannotationURL.length > 0" width="canvasWidth" height="canvasheight" no-padding>
+                            <signature-pad class="border" #signature [backgroundImages]="imageannotationURL" [disabled]="signatureDisabled" (onEndEvent)="drawComplete($event)" [canvasWidth]="canvasWidth" [canvasHeight]="(canvasheight * 0.75)"></signature-pad>
+                        </ion-item>
+                    </div>
+                </ion-row>
+
+                <br>
+            </div>
+            <div *ngIf="!displayImage">
+                <ion-row text-center [ngClass]="animateClass" text-center>
+                    <ion-col col-12 text-center>
+                        <h5 class="textslide">{{'No Document To Preview' | translate }}</h5>
+                    </ion-col>
+                </ion-row>
+
+
+            </div>
+        </ion-slide>
+    </ion-slides>
+    <div *ngIf="displayImage">
+        <ion-row no-margin *ngIf="dataImage.pageCount> 1">
+            <ion-col col-3></ion-col>
+            <ion-col col-1 no-padding>
+                <button class="padding0 styleicons" (click)="firstPage(1)" [disabled]="currentPage === 1"><ion-icon name="rewind" class="pageNumber color" ></ion-icon></button>
+            </ion-col>
+            <ion-col col-1 no-padding>
+                <button class="padding0 styleicons" (click)="previousPage(currentPage-1)" [disabled]="currentPage === 1"><ion-icon name="skip-backward" class="pageNumber color"></ion-icon></button>
+            </ion-col>
+            <ion-col col-2 no-padding class="pageNumber">
+                {{currentPage}}/{{dataImage.pageCount}}
+            </ion-col>
+            <ion-col col-1 no-padding>
+                <button class="padding0 styleicons" (click)="nextPage(currentPage+1)" [disabled]="currentPage === dataImage.pageCount"><ion-icon name="skip-forward" class="pageNumber color"></ion-icon></button>
+            </ion-col>
+            <ion-col col-1 no-padding>
+                <button class="padding0 styleicons" (click)="lastPage(dataImage.pageCount)" [disabled]="currentPage === dataImage.pageCount"><ion-icon name="fastforward" class="pageNumber color"></ion-icon></button>
+            </ion-col>
+            <ion-col col-3></ion-col>
+        </ion-row>
+    </div>
+
+</ion-content>
